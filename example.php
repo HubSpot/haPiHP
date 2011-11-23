@@ -19,9 +19,9 @@
 require_once 'class.leads.php';
 require_once 'class.settings.php';
 require_once 'class.events.php';
-
+require_once 'class.leadnurturing.php';
 $HAPIKey = 'demo';
-
+/*
 
 //Exercise Leads API
     $leads = new Leads($HAPIKey);
@@ -75,4 +75,16 @@ $HAPIKey = 'demo';
 
     //Add an event
     echo $events->add_event('This is my test event',null,'http://www.test.com', 'test');
+*/
+//Exercise Lead Nurturing API
+    $nurture = new LeadNurturing($HAPIKey);
+
+    //Get all campaigns
+    print_r($nurture->get_campaigns(false));
+
+    //Get members for campaign
+    print_r($nurture->get_campaign_members('2bb746ad-182f-4a47-a363-5668246f9ce2'));
+
+    //Get campaign history for a lead
+    print_r($nurture->get_campaign_history('8a706adf33a131b40133a1323f46000d'));
 ?>
