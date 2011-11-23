@@ -120,8 +120,9 @@ class Leads extends BaseClient {
     * @throws exception
     **/
     public function add_lead($formURL, $postFields) {
+        $body = $this->array_to_params($postFields);
         try {
-            return $this->execute_post_request($formURL, $postFields);
+            return $this->execute_post_request($formURL, $body);
         } catch (Exception $e) {
             throw new Exception('Unable to add lead: ' . $e);
         }   
@@ -158,8 +159,9 @@ class Leads extends BaseClient {
             throw new Exception('callbackURL is required');
         }
         $params = array('url'=>$callbackURL);
+        $body = $this->array_to_params($params);
         try {
-            return $this->execute_post_request($this->get_request_url($endpoint,null), $params);
+            return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
         } catch (Exception $e) {
             throw new Exception('Unable to register webhook: ' . $e);
         }

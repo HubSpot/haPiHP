@@ -79,8 +79,9 @@ class Events extends BaseClient {
         if (!$this->isBlank($eventType)) {
             $params['eventType'] = $eventType;
         }
+        $body = $this->array_to_params($params);
         try {
-            return $this->execute_post_request($this->get_request_url($endpoint,null), $params);
+            return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
         } catch (Exception $e) {
             throw new Exception('Unable to add event: ' . $e);
         }  

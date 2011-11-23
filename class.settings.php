@@ -73,8 +73,9 @@ class Settings extends BaseClient {
     public function update_setting($settingName, $value) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName, 'value'=>$value);
+        $body = $this->array_to_params($params);
         try {
-            return $this->execute_post_request($this->get_request_url($endpoint,null), $params);
+            return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
         } catch (Exception $e) {
             throw new Exception('Unable to update setting: ' . $e);
         }  

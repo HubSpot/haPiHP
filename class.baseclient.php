@@ -148,13 +148,13 @@ class BaseClient {
     * 
     * @throws exception
     **/
-    protected function execute_post_request($url, $fields) {
-        $strPost = $this->array_to_params($fields);
+    protected function execute_post_request($url, $body) {
+        //$strPost = $this->array_to_params($fields);
         
         // intialize cURL and send POST data
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $strPost);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
