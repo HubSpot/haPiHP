@@ -2,7 +2,7 @@
 require_once('class.baseclient.php');
 
 class Settings extends BaseClient {
-    //Client for HubSpot Leads API.
+    //Client for HubSpot Settings API.
 
     //Define required client variables
     protected $API_PATH = 'settings';    
@@ -84,4 +84,4 @@ class Settings extends BaseClient {
         }      
     }
 }
-
+?>
