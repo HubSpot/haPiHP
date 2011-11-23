@@ -127,12 +127,63 @@ class Leads extends BaseClient {
         }   
     }
 
-    public function get_webhook() {
-
+    /**
+    * Lists registered webhooks
+    *
+    * @returns Array of webhooks as stdObjects
+    *
+    * @throws exception
+    **/
+    public function get_webhooks() {
+        $endpoint = 'callback-url';
+        try {
+            return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
+        } catch (Exception $e) {
+            throw new Exception('Unable to retrieve webhooks: ' . $e);
+        }
     }
 
-    public function register_webhook() {
-
+    /**
+    * Registers a webhook
+    *
+    * @param callbackURL: The callback url to register
+    *
+    * @returns Body of POST request
+    *
+    * @throws exception
+    **/
+    public function register_webhook($callbackURL) {
+        $endpoint = 'callback-url';
+        if ($this->isBlank($callbackURL)) {
+            throw new Exception('callbackURL is required');
+        }
+        $params = array('url'=>$callbackURL);
+        try {
+            return $this->execute_post_request($this->get_request_url($endpoint,null), $params);
+        } catch (Exception $e) {
+            throw new Exception('Unable to register webhook: ' . $e);
+        }
     } 
+
+    /**
+    * Deletes a webhook
+    *
+    * @param webhookGuid: The guid of the webhook to delete
+    *
+    * @returns Body of DELETE request
+    *
+    * @throws exception
+    **/
+    public function delete_webhook($webhookGuid) {
+        if ($this->isBlank($webhookGuid)) {
+            throw new Exception('callbackGuid is required');
+        }
+        $endpoint = 'callback-url/' . $webhookGuid;
+        try {
+            return $this->execute_delete_request($this->get_request_url($endpoint,null), null);
+        } catch (Exception $e) {
+            throw new Exception('Unable to delete webhook: ' . $e);
+        }
+    }
 
 }

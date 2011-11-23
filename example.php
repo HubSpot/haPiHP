@@ -48,6 +48,12 @@ $HAPIKey = 'demo';
                         'company'=>'haPiHP');
     echo $leads->add_lead('http://demohubapi.app6.hubspot.com/?app=leaddirector&FormName=testform', $postValues);
 
+    //List Webhooks
+    print_r($leads->get_webhooks());
+
+    //Register Webhook
+    echo $leads->register_webhook('https://www.example.com');
+
 //Exercise Settings API
     $settings = new Settings($HAPIKey);
 
