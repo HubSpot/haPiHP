@@ -7,7 +7,14 @@ class Settings extends BaseClient {
     //Define required client variables
     protected $API_PATH = 'settings';    
     protected $API_VERSION = 'v1';
-
+    
+    /**
+    * Get a list of settings
+    *
+    * @returns Array of Settings as stdObjects
+    *
+    * @throws exception
+    **/
     public function get_settings() {
         $endpoint = 'settings';
         try {
@@ -17,6 +24,15 @@ class Settings extends BaseClient {
         }
     }
 
+    /**
+    * Get a specific setting
+    *
+    * @param settingName: String value of setting name to be retrieved
+    *
+    * @returns Setting as stdObject
+    *
+    * @throws exception
+    **/
     public function get_setting($settingName) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName);
@@ -27,6 +43,16 @@ class Settings extends BaseClient {
         }
     }
 
+    /**
+    * Update a setting value
+    *
+    * @param settingName: String name of the setting to be updated
+    * @param value: String value that setting should be valued to
+    *
+    * @returns Body of POST request
+    *
+    * @throws exception
+    **/
     public function update_setting($settingName, $value) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName, 'value'=>$value);
@@ -38,6 +64,15 @@ class Settings extends BaseClient {
 
     }
 
+    /**
+    * Delete a setting
+    *
+    * @param settingName: String name of the setting to be deleted
+    *
+    * @returns Body of DELETE request
+    *
+    * @throws exception
+    **/
     public function delete_setting($settingName) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName);
