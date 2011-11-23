@@ -19,8 +19,8 @@
 require_once 'class.leads.php';
 require_once 'class.settings.php';
 
-//$HAPIKey = 'some-really-long-api-key';
-$HAPIKey = 'b3nsm1t4';
+$HAPIKey = 'some-really-long-api-key';
+
 
 /*/Exercise Leads API
 $leads = new Leads($HAPIKey);
