@@ -1,0 +1,18 @@
+haPiHP
+======
+
+Overview
+-------------
+
+A PHP client for HubSpot's APIs.  Docs for this client: 
+<a href="https://github.com/HubSpot/haPiHP/wiki/haPiHP">https://github.com/HubSpot/haPiHP/wiki/haPiHP</a>.
+
+General API reference documentation: <a href="http://docs.hubapi.com">http://docs.hubapi.com</a>.
+
+Contributors
+------------
+
+This is a partial list in alphabetical order.
+
+* adrianmott (Adrian Mott) https://github.com/adrianmott
+* TheRealBenSmith (Ben Smith) https://github.com/TheRealBenSmith
