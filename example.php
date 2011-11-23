@@ -17,23 +17,35 @@
 * License.
 */
 require_once 'class.leads.php';
+require_once 'class.settings.php';
 
-$HAPIKey = 'some-really-long-api-key';
+//$HAPIKey = 'some-really-long-api-key';
+$HAPIKey = 'b3nsm1t4';
 
-	//Create new instance of HAPILeads class
-	$base = new Leads($HAPIKey);
-    	$params = array('max'=>5, 'excludeConversionEvents'=>'true');
-    	echo $base->get_leads($params);
-        $lead = $base->get_lead('8a706adf32896eda0132896fa1d3000b');
-        $newvalues = array('firstName'=>'from','lastName'=>'haPiHP');
-        echo $base->update_lead('8a706adf32896eda0132896fa1d3000b',$newvalues);        
-        echo $base->close_lead('8a706adf32896eda0132896fa1d3000b',1234567890123);
-        echo $lead->guid;
-	
-        $postValues = array('email'=>'haPiHPtest@hubspot.com',
-                            'firstName'=>'Posted',
-                            'lastName'=>'By',
-                            'company'=>'haPiHP');
-        echo $base->add_lead('http://somedomain.hubspot.com/?app=leaddirector&FormName=contactUs', $postValues);
+/*/Exercise Leads API
+$leads = new Leads($HAPIKey);
+$params = array('max'=>5, 'excludeConversionEvents'=>'true');
+print_r($base->get_leads($params));
 
+$lead = $base->get_lead('8a706adf32896eda0132896fa1d3000b');
+$newvalues = array('firstName'=>'from','lastName'=>'haPiHP');
+echo $base->update_lead('8a706adf32896eda0132896fa1d3000b',$newvalues);        
+echo $base->close_lead('8a706adf32896eda0132896fa1d3000b',1234567890123);
+echo $lead->guid;
+
+$postValues = array('email'=>'haPiHPtest@hubspot.com',
+                    'firstName'=>'Posted',
+                    'lastName'=>'By',
+                    'company'=>'haPiHP');
+//echo $base->add_lead('http://somedomain.hubspot.com/?app=leaddirector&FormName=contactUs', $postValues);
+*/
+//Exercise Settings API
+    $settings = new Settings($HAPIKey);
+    //Get all settings
+    //print_r($settings->get_settings());
+    //Get a specific setting
+    print_r($settings->get_setting('BG:FollowMeEnabled'));
+    //Update a setting
+    //echo $settings->update_setting('BenSmith','true');
+    echo $settings->delete_setting('BenSmith');
 ?>

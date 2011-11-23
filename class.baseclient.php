@@ -88,12 +88,7 @@ class BaseClient {
     * @returns String
     **/
     protected function get_request_url($endpoint,$params) {
-        $paramstring = '';
-        if ($params != null) {
-            foreach ($params as $parameter => $value) {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . $value;
-            }
-        }
+        $paramstring = $this->array_to_params($params);
         return $this->get_domain() . $this->PATH_DIV . 
                $this->get_api() . $this->PATH_DIV . 
                $this->get_api_version() . $this->PATH_DIV . 
@@ -138,17 +133,7 @@ class BaseClient {
     * @throws exception
     **/
     protected function execute_post_request($url, $fields) {
-        $strPost = "";
-        
-        // Turn $fields into POST-compatible list of parameters
-        foreach ($fields as $fieldName => $fieldValue)
-        {
-            $strPost .= urlencode($fieldName) . '=';
-            $strPost .= urlencode($fieldValue);
-            $strPost .= '&';
-        }
-        
-        $strPost = rtrim($strPost, '&'); // nuke the final ampersand
+        $strPost = $this->array_to_params($fields);
         
         // intialize cURL and send POST data
         $ch = curl_init();
@@ -196,9 +181,53 @@ class BaseClient {
             return $result;
         }
     }
-    
-    protected function execute_delete_request($url) {
-        
+
+    /**
+    * Executes HTTP DELETE request
+    *
+    * @param URL: String value for the URL to DELETE to
+    * @param body: String value of the body of the DELETE request
+    *
+    * @returns: Body of request result
+    * 
+    * @throws exception
+    **/    
+    protected function execute_delete_request($url, $body) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($body)));
+        //curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = curl_exec($ch);
+        $apierr = curl_errno($ch); 
+        $errmsg = curl_error($ch); 
+        curl_close($ch);
+        if ($apierr > 0) {
+            throw new Exception('cURL error: ' + $errmsg);
+        } else {
+            return $result;
+        }
+    }
+
+    /**
+    * Converts an array into url friendly list of parameters
+    *
+    * @param params: Array of parameters (name=>value)
+    *
+    * @returns String of url friendly parameters (&name=value&foo=bar)
+    *
+    **/
+    protected function array_to_params($params) {
+        $paramstring = '';
+        if ($params != null) {
+            foreach ($params as $parameter => $value) {
+                 $paramstring = $paramstring . '&' . $parameter . '=' . $value;
+            }
+        }
+        return $paramstring;
     }
 
     /**
