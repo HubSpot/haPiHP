@@ -37,7 +37,7 @@ class Events extends BaseClient {
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null))); 
         } catch (Exception $e) {
-            throw new Exception('Unable to retrieve settings: ' . $e);
+            throw new Exception('Unable to retrieve events: ' . $e);
         }
     }
 
