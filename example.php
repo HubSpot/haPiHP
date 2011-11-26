@@ -20,6 +20,8 @@ require_once 'class.leads.php';
 require_once 'class.settings.php';
 require_once 'class.events.php';
 require_once 'class.leadnurturing.php';
+require_once 'class.prospects.php';
+
 $HAPIKey = 'demo';
 /*
 
@@ -87,4 +89,14 @@ $HAPIKey = 'demo';
 
     //Get campaign history for a lead
     print_r($nurture->get_campaign_history('8a706adf33a131b40133a1323f46000d'));
+
+//Exercise Prospects API
+    $prospects = new Prospects($HAPIKey);
+    print_r($prospects->get_timeline(null));
+    print_r($prospects->get_organization_details('MURPHX INNOVATIVE SOLUTIONS'));
+    print_r($prospects->get_typeahead('MURPH'));
+    print_r($prospects->get_search_results('country', 'UNITED KINGDOM'));
+    echo $prospects->add_filter('SOMEORG');
+    print_r($prospects->get_filters());
+    echo $prospects->delete_filter('SOMEORG');
 ?>
