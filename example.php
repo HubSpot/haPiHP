@@ -92,11 +92,25 @@ $HAPIKey = 'demo';
 
 //Exercise Prospects API
     $prospects = new Prospects($HAPIKey);
+    
+    //Get prospects timeline
     print_r($prospects->get_timeline(null));
-    print_r($prospects->get_organization_details('MURPHX INNOVATIVE SOLUTIONS'));
-    print_r($prospects->get_typeahead('MURPH'));
-    print_r($prospects->get_search_results('country', 'UNITED KINGDOM'));
-    echo $prospects->add_filter('SOMEORG');
+
+    //Get org details
+    print_r($prospects->get_organization_details('murphx innovative solutions'));
+    
+    //Get typeahead results
+    print_r($prospects->get_typeahead('murph'));
+    
+    //Get search results
+    print_r($prospects->get_search_results('country', 'united kingdom'));
+    
+    //Add a filter
+    echo $prospects->add_filter('someorg');
+    
+    //List filters    
     print_r($prospects->get_filters());
-    echo $prospects->delete_filter('SOMEORG');
+    
+    //Delete a filter
+    echo $prospects->delete_filter('someorg');
 ?>
