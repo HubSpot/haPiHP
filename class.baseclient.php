@@ -149,7 +149,6 @@ class BaseClient {
     * @throws exception
     **/
     protected function execute_post_request($url, $body) {
-        //$strPost = $this->array_to_params($fields);
         
         // intialize cURL and send POST data
         $ch = curl_init();
@@ -240,7 +239,7 @@ class BaseClient {
         $paramstring = '';
         if ($params != null) {
             foreach ($params as $parameter => $value) {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . $value;
+                 $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
             }
         }
         return $paramstring;
