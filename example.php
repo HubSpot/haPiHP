@@ -21,9 +21,9 @@ require_once 'class.settings.php';
 require_once 'class.events.php';
 require_once 'class.leadnurturing.php';
 require_once 'class.prospects.php';
+require_once 'class.keywords.php';
 
 $HAPIKey = 'demo';
-/*
 
 //Exercise Leads API
     $leads = new Leads($HAPIKey);
@@ -77,7 +77,7 @@ $HAPIKey = 'demo';
 
     //Add an event
     echo $events->add_event('This is my test event',null,'http://www.test.com', 'test');
-*/
+
 //Exercise Lead Nurturing API
     $nurture = new LeadNurturing($HAPIKey);
 
@@ -113,4 +113,21 @@ $HAPIKey = 'demo';
     
     //Delete a filter
     echo $prospects->delete_filter('someorg');
+
+//Exercise Keywords API
+    $keywords = new Keywords($HAPIKey);
+
+    //Add keyword
+    $addedKeyword = json_decode($keywords->add_keyword('hapiphp'));
+    print_r($addedKeyword);
+    $addedGuid = $addedKeyword->keywords[0]->keyword_guid;
+    
+    //Get list of keywords
+    print_r($keywords->get_keywords());
+
+    //Get specific keyword
+    print_r($keywords->get_keyword($addedGuid));
+
+    //Delete specific keyword
+    echo $keywords->delete_keyword($addedGuid);
 ?>
