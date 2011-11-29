@@ -22,8 +22,48 @@ require_once 'class.events.php';
 require_once 'class.leadnurturing.php';
 require_once 'class.prospects.php';
 require_once 'class.keywords.php';
+require_once 'class.blog.php';
 
 $HAPIKey = 'demo';
+
+//Exercise Blog API
+    $blogs = new Blog($HAPIKey);
+    //$content_type = 'json';
+/*
+    //List a blog for a specific portal (API key)
+    $params = array('max'=>1);
+    print_r($blogs->get_blogs($params, $content_type));
+
+    //Get info about a specific blog
+    $params = array();
+    print_r($blogs->get_blog($params, '0d61e4ca-e395-4c1c-8766-afaa48bf68db', $content_type));
+
+    //List posts for a specific blog
+    $params = array('max'=>2);
+    print_r($blogs->get_posts($params, '0d61e4ca-e395-4c1c-8766-afaa48bf68db', $content_type));
+
+    //List comments for a specific blog
+    $params = array('max'=>2);
+    print_r($blogs->get_comments($params, '0d61e4ca-e395-4c1c-8766-afaa48bf68db', $content_type));
+
+    //Get information about a specific blog post
+    $params = array();
+    print_r($blogs->get_post($params, '71e3900b-c02e-420f-9686-49a1706d56a2', $content_type));
+
+    //List comments for a specific post
+    $params = array();
+    print_r($blogs->get_post_comments($params, '71e3900b-c02e-420f-9686-49a1706d56a2', $content_type));
+
+    //Get information about a specific comment
+    $params = array();
+    print_r($blogs->get_comment($params, 'a180af6e-39ea-46f2-a751-c56312d48269', $content_type));
+*/
+    //Create a blog post in a specific blog
+    //($blog_guid, $title, $author_name, $author_email, $summary, $post_content, $tags)
+    $tags = array('hapihp tag 1', 'hapihp tag 2');
+    echo $blogs->create_post('0d61e4ca-e395-4c1c-8766-afaa48bf68db', 'Test Author', 'testapi@hubspot.com', 'find this one', 'testing hapihp summary', 'this is the content for testing hapihp', $tags);
+
+/*
 
 //Exercise Leads API
     $leads = new Leads($HAPIKey);
@@ -130,4 +170,5 @@ $HAPIKey = 'demo';
 
     //Delete specific keyword
     echo $keywords->delete_keyword($addedGuid);
+*/
 ?>

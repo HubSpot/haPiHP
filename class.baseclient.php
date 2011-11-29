@@ -166,6 +166,36 @@ class BaseClient {
             return $output;
         }
     }
+    
+    /**
+    * Executes HTTP POST request with XML as the POST body
+    *
+    * @param URL: String value for the URL to POST to
+    * @param fields: Array containing names and values for fields to post
+    *
+    * @returns: Body of request result
+    * 
+    * @throws exception
+    **/
+    protected function execute_xml_post_request($url, $body) {
+        
+        // intialize cURL and send POST data
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/atom+xml'));
+        $output = curl_exec($ch);
+        $errno = curl_errno($ch);
+        $error = curl_error($ch);
+        curl_close($ch); 
+        if ($errno > 0) {
+            throw new Exception ('cURL error: ' + $error);
+        } else {
+            return $output;
+        }
+    }
 
     /**
     * Executes HTTP PUT request
