@@ -19,7 +19,7 @@
 require_once('class.baseclient.php');
 
 class Blog extends BaseClient {
-    //Client for HubSpot Lead Nurturing API.
+    //Client for HubSpot Blog API.
 
     //Define required client variables
     protected $API_PATH = 'blog';    
