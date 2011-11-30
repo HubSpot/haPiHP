@@ -6,6 +6,10 @@ class HubSpotMarketplace{
     protected $marketplaceSignature;
     protected $marketplaceCaller;
     protected $marketplaceUserId;
+    protected $marketplaceUserEmail;
+    protected $marketplaceUserFirstName;
+    protected $marketplaceUserLastName;
+    protected $marketplaceUserGlobal;
     protected $marketplacePortalId;
     protected $marketplaceAppName;
     protected $marketplaceAppCallbackURL;
@@ -23,6 +27,10 @@ class HubSpotMarketplace{
         $this->marketplaceSignature = $request['hubspot_marketplace_signature'];
         $this->marketplaceCaller = $request['hubspot_marketplace_caller'];
         $this->marketplaceUserId = $request['hubspot_marketplace_user_id'];
+        $this->marketplaceUserEmail = $request['hubspot_marketplace_user_email'];
+        $this->marketplaceUserFirstName = $request['hubspot_marketplace_user_first_name'];
+        $this->marketplaceUserLastName = $request['hubspot_marketplace_user_last_name'];
+        $this->marketplaceUserGlobal = $request['hubspot_marketplace_user_global'];
         $this->marketplacePortalId = $request['hubspot_marketplace_portal_id'];
         $this->marketplaceAppName = $request['hubspot_marketplace_app_name'];
         $this->marketplaceAppCallbackURL = $request['hubspot_marketplace_app_callbackUrl'];
@@ -51,6 +59,38 @@ class HubSpotMarketplace{
     **/
     public function getUserId() {
         return $this->marketplaceUserId;
+    }
+
+    /**
+    * @returns String value of hubspot_marketplace_user_email
+    **/
+    public function getUserEmail() {
+        return $this->marketplaceUserEmail;
+    }
+
+    /**
+    * @returns String value of hubspot_marketplace_user_first_name
+    **/
+    public function getUserFirstName() {
+        return $this->marketplaceUserFirstName;
+    }
+
+    /**
+    * @returns String value of hubspot_marketplace_user_last_name
+    **/
+    public function getUserLastName() {
+        return $this->marketplaceUserLastName;
+    }
+
+    /**
+    * @returns Boolean value of hubspot_marketplace_user_global
+    **/
+    public function getUserGlobal() {
+        if ($this->marketplaceUserGlobal == 'true') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
