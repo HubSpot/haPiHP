@@ -97,7 +97,7 @@ class HubSpotMarketplace{
     * @returns boolean true if request is verified, false if not verified
     **/
     protected function parseSignedRequest($marketplaceSignature) {
-        list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+        list($encoded_sig, $payload) = explode('.', $marketplaceSignature, 2);
 
         // decode the data
         $sig = $this->base64UrlDecode($encoded_sig);
