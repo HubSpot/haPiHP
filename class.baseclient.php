@@ -185,6 +185,7 @@ class BaseClient {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/atom+xml'));
         $output = curl_exec($ch);
         $errno = curl_errno($ch);
@@ -211,6 +212,36 @@ class BaseClient {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($body)));
+        //curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = curl_exec($ch);
+        $apierr = curl_errno($ch); 
+        $errmsg = curl_error($ch); 
+        curl_close($ch);
+        if ($apierr > 0) {
+            throw new Exception('cURL error: ' + $errmsg);
+        } else {
+            return $result;
+        }
+    }
+    
+    /**
+    * Executes HTTP PUT request with XML as the PUT body
+    *
+    * @param URL: String value for the URL to PUT to
+    * @param body: String value of the body of the PUT request
+    *
+    * @returns: Body of request result
+    * 
+    * @throws exception
+    **/
+    protected function execute_xml_put_request($url, $body) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/atom+xml','Content-Length: ' . strlen($body)));
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
