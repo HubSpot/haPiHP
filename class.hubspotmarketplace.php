@@ -15,6 +15,9 @@ class HubSpotMarketplace{
     protected $marketplaceAppCallbackURL;
     protected $marketplaceAppPageURL;
     protected $marketplaceAppCanvasURL;
+    protected $marketplaceAccessToken;
+    protected $marketplaceAccessExpires;
+    protected $marketplaceRefreshToken;
 
     /**
     * Constructor.
@@ -36,6 +39,9 @@ class HubSpotMarketplace{
         $this->marketplaceAppCallbackURL = $request['hubspot_marketplace_app_callbackUrl'];
         $this->marketplaceAppPageURL = $request['hubspot_marketplace_app_pageUrl'];
         $this->marketplaceAppCanvasURL = $request['hubspot_marketplace_canvasUrl'];
+        $this->marketplaceAccessToken = $request['hubspot_marketplace_accessToken'];
+        $this->marketplaceAccessExpires = $request['hubspot_marketplace_accessExpires'];
+        $this->marketplaceRefreshToken = $request['hubspot_marketplace_refreshToken'];
     }
 
     /**
@@ -127,6 +133,29 @@ class HubSpotMarketplace{
     public function getAppCanvasURL() {
         return $this->marketplaceAppCanvasURL;
     }
+    
+    /**
+    * @returns String value of hubspot_marketplace_accessToken
+    **/
+    public function getAccessToken() {
+        return $this->marketplaceAccessToken;
+    }
+    
+    /**
+    * @returns String value of hubspot_marketplace_accessExpires
+    **/
+    public function getAccessExpires() {
+        return $this->marketplaceAccessExpires;
+    }
+    
+    /**
+    * @returns String value of hubspot_marketplace_refreshToken
+    **/
+    public function getRefreshToken() {
+        return $this->marketplaceRefreshToken;
+    }
+    
+    
 
     /**
     * Parses and decodes hubspot_marketplace_signature to verify
