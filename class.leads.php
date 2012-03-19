@@ -161,7 +161,7 @@ class Leads extends BaseClient {
         $params = array('url'=>$callbackURL);
         $body = $this->array_to_params($params);
         try {
-            return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
+            return $this->execute_post_request($this->get_request_url($endpoint,null), $body, true);	// new
         } catch (Exception $e) {
             throw new Exception('Unable to register webhook: ' . $e);
         }
