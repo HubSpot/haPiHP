@@ -26,16 +26,18 @@ class BaseClient {
     protected $isTest = false;
     protected $PATH_DIV = '/';
     protected $KEY_PARAM = '?hapikey=';
-    protected $PROD_DOMAIN = 'https://hubapi.com';
+    protected $PROD_DOMAIN = 'https://api.hubapi.com';
     protected $QA_DOMAIN = 'https://hubapiqa.com';
+    protected $userAgent;	// new
 
     /**
     * Constructor.
     *
     * @param $HAPIKey: String value of HubSpot API Key for requests
     **/
-    function __construct($HAPIKey) {
+    function __construct($HAPIKey,$userAgent="haPiHP default UserAgent") {	// new
         $this->HAPIKey = $HAPIKey;
+		$this->userAgent = $userAgent;	// new
     }
 
     /**
@@ -127,6 +129,7 @@ class BaseClient {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
         $output = curl_exec($ch);
         $errno = curl_errno($ch);
         $error = curl_error($ch);
@@ -148,7 +151,7 @@ class BaseClient {
     * 
     * @throws exception
     **/
-    protected function execute_post_request($url, $body) {
+    protected function execute_post_request($url, $body, $formenc=FALSE) {	//new
         
         // intialize cURL and send POST data
         $ch = curl_init();
@@ -156,6 +159,9 @@ class BaseClient {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
+		if ($formenc)	// new
+	        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));	// new
         $output = curl_exec($ch);
         $errno = curl_errno($ch);
         $error = curl_error($ch);
@@ -185,6 +191,7 @@ class BaseClient {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/atom+xml'));
         $output = curl_exec($ch);
@@ -211,6 +218,7 @@ class BaseClient {
     protected function execute_put_request($url, $body) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($body)));
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -241,6 +249,7 @@ class BaseClient {
     protected function execute_xml_put_request($url, $body) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/atom+xml','Content-Length: ' . strlen($body)));
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -271,6 +280,7 @@ class BaseClient {
     protected function execute_delete_request($url, $body) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);	// new
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($body)));
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
