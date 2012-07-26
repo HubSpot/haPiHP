@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class Events extends BaseClient {
+class HubSpot_Events extends HubSpot_BaseClient {
     //Client for HubSpot Marketing Events API.
 
     //Define required client variables

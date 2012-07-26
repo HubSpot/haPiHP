@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class Keywords extends BaseClient {
+class HubSpot_Keywords extends HubSpot_BaseClient {
     //Client for HubSpot Keywords API.
 
     //Define required client variables

@@ -15,4 +15,5 @@ Contributors
 This is a partial list in alphabetical order.
 
 * adrianmott (Adrian Mott) https://github.com/adrianmott
+* chrishoult (Christopher Hoult) https://github.com/chrishoult
 * TheRealBenSmith (Ben Smith) https://github.com/TheRealBenSmith

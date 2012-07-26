@@ -27,7 +27,7 @@ require_once 'class.blog.php';
 $HAPIKey = 'demo';
 
 //Exercise Blog API
-    $blogs = new Blog($HAPIKey);
+    $blogs = new HubSpot_Blog($HAPIKey);
     $content_type = 'json';
 
     //List blogs for a specific portal (API key)
@@ -87,7 +87,7 @@ $HAPIKey = 'demo';
 
 
 //Exercise Leads API
-    $leads = new Leads($HAPIKey);
+    $leads = new HubSpot_Leads($HAPIKey);
     
     //Get list of leads
     $params = array('max'=>5, 'excludeConversionEvents'=>'true');
@@ -118,7 +118,7 @@ $HAPIKey = 'demo';
     echo $leads->register_webhook('https://www.example.com');
 
 //Exercise Settings API
-    $settings = new Settings($HAPIKey);
+    $settings = new HubSpot_Settings($HAPIKey);
 
     //Get all settings
     print_r($settings->get_settings());
@@ -131,7 +131,7 @@ $HAPIKey = 'demo';
     echo $settings->delete_setting('BenSmith');
     
 //Exercise Marketing Events API
-    $events = new Events($HAPIKey);
+    $events = new HubSpot_Events($HAPIKey);
     
     //Get all events
     print_r($events->get_events());
@@ -140,7 +140,7 @@ $HAPIKey = 'demo';
     echo $events->add_event('This is my test event',null,'http://www.test.com', 'test');
     
 //Exercise Lead Nurturing API
-    $nurture = new LeadNurturing($HAPIKey);
+    $nurture = new HubSpot_LeadNurturing($HAPIKey);
     
     //Get all campaigns
     print_r($nurture->get_campaigns(false));
@@ -152,7 +152,7 @@ $HAPIKey = 'demo';
     print_r($nurture->get_campaign_history('8a706adf33a131b40133a1323f46000d'));
     
 //Exercise Prospects API
-    $prospects = new Prospects($HAPIKey);
+    $prospects = new HubSpot_Prospects($HAPIKey);
     
     //Get prospects timeline
     print_r($prospects->get_timeline(null));
@@ -176,7 +176,7 @@ $HAPIKey = 'demo';
     echo $prospects->delete_filter('someorg');
     
 //Exercise Keywords API
-    $keywords = new Keywords($HAPIKey);
+    $keywords = new HubSpot_Keywords($HAPIKey);
     
     //Add keyword
     $addedKeyword = json_decode($keywords->add_keyword('hapiphp'));
