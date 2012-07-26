@@ -7,7 +7,7 @@ Overview
 A PHP client for HubSpot's APIs.  Docs for this client: 
 <a href="https://github.com/HubSpot/haPiHP/wiki/haPiHP">https://github.com/HubSpot/haPiHP/wiki/haPiHP</a>.
 
-General API reference documentation: <a href="http://docs.hubapi.com">http://docs.hubapi.com</a>.
+General API reference documentation: <a href="http://developers.hubspot.com/docs">http://developers.hubspot.com/docs</a>.
 
 Contributors
 ------------
