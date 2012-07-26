@@ -2,18 +2,18 @@
 /**
 * Copyright 2011 HubSpot, Inc.
 *
-*   Licensed under the Apache License, Version 2.0 (the 
-* "License"); you may not use this file except in compliance 
+*   Licensed under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
 * with the License.
 *   You may obtain a copy of the License at
 *
 *       http://www.apache.org/licenses/LICENSE-2.0
 *
-*   Unless required by applicable law or agreed to in writing, 
-* software distributed under the License is distributed on an 
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
-* either express or implied.  See the License for the specific 
-* language governing permissions and limitations under the 
+*   Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+* either express or implied.  See the License for the specific
+* language governing permissions and limitations under the
 * License.
 */
 require_once('class.baseclient.php');
@@ -22,22 +22,22 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     //Client for HubSpot Settings API.
 
     //Define required client variables
-    protected $API_PATH = 'settings';    
+    protected $API_PATH = 'settings';
     protected $API_VERSION = 'v1';
-    
+
     /**
     * Get a list of settings
     *
     * @returns Array of Settings as stdObjects
     *
-    * @throws exception
+    * @throws HubSpot_Exception
     **/
     public function get_settings() {
         $endpoint = 'settings';
         try {
-            return json_decode($this->execute_get_request($this->get_request_url($endpoint,null))); 
-        } catch (Exception $e) {
-            throw new Exception('Unable to retrieve settings: ' . $e);
+            return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
+        } catch (HubSpot_Exception $e) {
+            throw new HubSpot_Exception('Unable to retrieve settings: ' . $e);
         }
     }
 
@@ -48,15 +48,15 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Setting as stdObject
     *
-    * @throws exception
+    * @throws HubSpot_Exception
     **/
     public function get_setting($settingName) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName);
         try {
-            return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params))); 
-        } catch (Exception $e) {
-            throw new Exception('Unable to retrieve setting: ' . $e);
+            return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
+        } catch (HubSpot_Exception $e) {
+            throw new HubSpot_Exception('Unable to retrieve setting: ' . $e);
         }
     }
 
@@ -68,7 +68,7 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws exception
+    * @throws HubSpot_Exception
     **/
     public function update_setting($settingName, $value) {
         $endpoint = 'settings';
@@ -76,9 +76,9 @@ class HubSpot_Settings extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (Exception $e) {
-            throw new Exception('Unable to update setting: ' . $e);
-        }  
+        } catch (HubSpot_Exception $e) {
+            throw new HubSpot_Exception('Unable to update setting: ' . $e);
+        }
 
     }
 
@@ -89,7 +89,7 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Body of DELETE request
     *
-    * @throws exception
+    * @throws HubSpot_Exception
     **/
     public function delete_setting($settingName) {
         $endpoint = 'settings';
@@ -97,9 +97,8 @@ class HubSpot_Settings extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_delete_request($this->get_request_url($endpoint,null), $body);
-        } catch (Exception $e) {
-            throw new Exception('Unable to delete setting: ' . $e);
-        }      
+        } catch (HubSpot_Exception $e) {
+            throw new HubSpot_Exception('Unable to delete setting: ' . $e);
+        }
     }
 }
-?>

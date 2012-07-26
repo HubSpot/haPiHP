@@ -1,6 +1,6 @@
 <?php
 
-class HubSpotMarketplace{  
+class HubSpotMarketplace{
 
     protected $appSecret;
     protected $marketplaceSignature;
@@ -133,29 +133,29 @@ class HubSpotMarketplace{
     public function getAppCanvasURL() {
         return $this->marketplaceAppCanvasURL;
     }
-    
+
     /**
     * @returns String value of hubspot_marketplace_accessToken
     **/
     public function getAccessToken() {
         return $this->marketplaceAccessToken;
     }
-    
+
     /**
     * @returns String value of hubspot_marketplace_accessExpires
     **/
     public function getAccessExpires() {
         return $this->marketplaceAccessExpires;
     }
-    
+
     /**
     * @returns String value of hubspot_marketplace_refreshToken
     **/
     public function getRefreshToken() {
         return $this->marketplaceRefreshToken;
     }
-    
-    
+
+
 
     /**
     * Parses and decodes hubspot_marketplace_signature to verify
@@ -194,4 +194,3 @@ class HubSpotMarketplace{
         return base64_decode(strtr($input, '-_', '+/'));
     }
 }
-?>
