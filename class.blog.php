@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class Blog extends BaseClient {
+class HubSpot_Blog extends HubSpot_BaseClient {
     //Client for HubSpot Blog API.
 
     //Define required client variables

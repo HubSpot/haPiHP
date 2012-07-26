@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class Settings extends BaseClient {
+class HubSpot_Settings extends HubSpot_BaseClient {
     //Client for HubSpot Settings API.
 
     //Define required client variables

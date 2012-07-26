@@ -16,8 +16,8 @@
 * language governing permissions and limitations under the 
 * License.
 */
-class BaseClient {
-    // BaseClient class to be extended by specific hapi clients
+class HubSpot_BaseClient {
+    // HubSpot_BaseClient class to be extended by specific hapi clients
 
     // Declare variables
     protected $HAPIKey;
@@ -42,7 +42,7 @@ class BaseClient {
 
     /**
     * Returns API_PATH that is set in specific hapi clients.  All
-    * clients that extend BaseClient should set $API_PATH to the 
+    * clients that extend HubSpot_BaseClient should set $API_PATH to the 
     * base path for the API (e.g.: the leads api sets the value to
     * 'leads')
     *
@@ -58,7 +58,7 @@ class BaseClient {
 
     /**
     * Returns API_VERSION that is set in specific hapi clients. All
-    * clients that extend BaseClient should set $API_VERSION to the
+    * clients that extend HubSpot_BaseClient should set $API_VERSION to the
     * version that the client is developed for (e.g.: the leads v1
     * client sets the value to 'v1')
     *

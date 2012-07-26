@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class Leads extends BaseClient {
+class HubSpot_Leads extends HubSpot_BaseClient {
     //Client for HubSpot Leads API.
 
     //Define required client variables
