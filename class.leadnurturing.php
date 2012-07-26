@@ -18,7 +18,7 @@
 */
 require_once('class.baseclient.php');
 
-class LeadNurturing extends BaseClient {
+class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     //Client for HubSpot Lead Nurturing API.
 
     //Define required client variables
