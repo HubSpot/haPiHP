@@ -196,21 +196,23 @@ $HAPIKey = 'demo';
 */
 //Excercise Contacts API
         $contacts = new HubSpot_Contacts($HAPIKey);
-/*
+
+        $unique_email = 'testemail+'.uniqid().'@emailtest.com';
         //Create Contact
-        $params =  array('email' => 'wgordon+test@hubspot.com', 'firstname' => 'Webster' );
+        $params =  array('email' => $unique_email, 'firstname' => 'Webster' );
         $createdContact = $contacts->create_contact($params);
         print_r($createdContact);
+        $newly_created_vid = $createdContact->{'vid'};
 
         //Update Contact
-        $params =  array('email' => 'wgordon+test@hubspot.com', 'lastname' => 'Gordon' );
-        $updatedContact = $contacts->update_contact('150740',$params);
+        $params =  array('lastname' => 'Gordon' );
+        $updatedContact = $contacts->update_contact($newly_created_vid,$params);
         print_r($updatedContact);
 
         //Delete Contact
-        $deletedContact = $contacts->delete_contact('150740');
+        $deletedContact = $contacts->delete_contact($newly_created_vid);
         print_r($deletedContact);
-
+/*
         //Get all Contacts
         $contacts_batch1 = $contacts->get_all_contacts();
         print_r($contacts_batch1);
@@ -224,11 +226,11 @@ $HAPIKey = 'demo';
         $offset = $contacts_recent_batch1->{'vid-offset'};
         $contacts_recent_batch2 = $contacts->get_recent_contacts(array('vidOffset'=>$offset));
         print_r($contacts_recent_batch2);
-*/
+
         //Get Contact by ID, email, usertoken
-        $contactByID = $contacts->get_contact_by_id('151655');
+        $contactByID = $contacts->get_contact_by_id('151682');
         print_r($contactByID);
-        $contactByEmail = $contacts->get_contact_by_email('danna.biers.18@facebook.com');
+        $contactByEmail = $contacts->get_contact_by_email('wgordon+test@hubspot.com');
         print_r($contactByEmail);
         $contactByUsertoken = $contacts->get_contact_by_usertoken('770f8023b3e6b10fc080155c4ebdfc0e');
         print_r($contactByUsertoken);
@@ -273,5 +275,5 @@ $HAPIKey = 'demo';
         $workflow_upcoming = $workflows->get_upcoming_events('23525','151421');
         print_r($workflow_upcoming);
 
-
+*/
 ?>
