@@ -18,14 +18,16 @@
 */
 require_once 'class.leads.php';
 require_once 'class.settings.php';
-require_once 'class.events.php';
+//require_once 'class.events.php';
 require_once 'class.leadnurturing.php';
 require_once 'class.prospects.php';
 require_once 'class.keywords.php';
 require_once 'class.blog.php';
+require_once 'class.contacts.php';
+require_once 'class.workflows.php';
 
 $HAPIKey = 'demo';
-
+/*
 //Exercise Blog API
     $blogs = new HubSpot_Blog($HAPIKey);
     $content_type = 'json';
@@ -129,7 +131,7 @@ $HAPIKey = 'demo';
     //Update a setting
     echo $settings->update_setting('BenSmith','true');
     echo $settings->delete_setting('BenSmith');
-    
+
 //Exercise Marketing Events API
     $events = new HubSpot_Events($HAPIKey);
     
@@ -138,7 +140,7 @@ $HAPIKey = 'demo';
     
     //Add an event
     echo $events->add_event('This is my test event',null,'http://www.test.com', 'test');
-    
+
 //Exercise Lead Nurturing API
     $nurture = new HubSpot_LeadNurturing($HAPIKey);
     
@@ -191,5 +193,85 @@ $HAPIKey = 'demo';
     
     //Delete specific keyword
     echo $keywords->delete_keyword($addedGuid);
+*/
+//Excercise Contacts API
+        $contacts = new HubSpot_Contacts($HAPIKey);
+/*
+        //Create Contact
+        $params =  array('email' => 'wgordon+test@hubspot.com', 'firstname' => 'Webster' );
+        $createdContact = $contacts->create_contact($params);
+        print_r($createdContact);
+
+        //Update Contact
+        $params =  array('email' => 'wgordon+test@hubspot.com', 'lastname' => 'Gordon' );
+        $updatedContact = $contacts->update_contact('150740',$params);
+        print_r($updatedContact);
+
+        //Delete Contact
+        $deletedContact = $contacts->delete_contact('150740');
+        print_r($deletedContact);
+
+        //Get all Contacts
+        $contacts_batch1 = $contacts->get_all_contacts();
+        print_r($contacts_batch1);
+        $offset = $contacts_batch1->{'vid-offset'};
+        $contacts_batch2 = $contacts->get_all_contacts(array('vidOffset'=>$offset));
+        print_r($contacts_batch2);
+
+        //Get recent Contacts
+        $contacts_recent_batch1 = $contacts->get_recent_contacts();
+        print_r($contacts_recent_batch1);
+        $offset = $contacts_recent_batch1->{'vid-offset'};
+        $contacts_recent_batch2 = $contacts->get_recent_contacts(array('vidOffset'=>$offset));
+        print_r($contacts_recent_batch2);
+*/
+        //Get Contact by ID, email, usertoken
+        $contactByID = $contacts->get_contact_by_id('151655');
+        print_r($contactByID);
+        $contactByEmail = $contacts->get_contact_by_email('danna.biers.18@facebook.com');
+        print_r($contactByEmail);
+        $contactByUsertoken = $contacts->get_contact_by_usertoken('770f8023b3e6b10fc080155c4ebdfc0e');
+        print_r($contactByUsertoken);
+
+        //Search Contacts
+        $contactsSearchResult = $contacts->search_contacts(array('q'=>'test'));
+        print_r($contactsSearchResult);
+
+        //Get Contacts statistics
+        $contactsStats = $contacts->get_contacts_statistics();
+        print_r($contactsStats);
+
+
+    //Exercise Workflows API
+        $workflows = new HubSpot_Workflows($HAPIKey);
+
+        //Get all Workflows
+        $all_workflows = $workflows->get_all_workflows();
+        print_r($all_workflows);
+
+        //Get Workflow by ID
+        $workflow_from_id = $workflows->get_workflow_by_ID('23525');
+        print_r($workflow_from_id);
+
+        //Enroll contact in Workflow
+        $enrolled_contact = $workflows->enroll_contact_in_workflow('23525','danna.biers.18@facebook.com');
+        print_r($enrolled_contact);
+
+        //Unenroll contact from Workflow
+        $unenrolled_contact = $workflows->unenroll_contact_from_workflow('23525','danna.biers.18@facebook.com');
+        print_r($unenrolled_contact);
+
+        //Get current enrollments for Contact
+        $contact_enrollments = $workflows->get_current_enrollments('151421');
+        print_r($contact_enrollments);
+
+        //Get log events for contact by ID in Workflow by ID
+        $workflow_logs = $workflows->get_log_events('23525','151421');
+        print_r($workflow_logs);
+
+        //Get upcoming events for contact by ID in Workflow by ID
+        $workflow_upcoming = $workflows->get_upcoming_events('23525','151421');
+        print_r($workflow_upcoming);
+
 
 ?>
