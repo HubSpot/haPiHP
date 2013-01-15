@@ -212,6 +212,39 @@ class HubSpot_BaseClient {
         }
     }
 
+        /**
+    * Executes HTTP POST request with JSON as the POST body
+    *
+    * @param URL: String value for the URL to POST to
+    * @param fields: Array containing names and values for fields to post
+    *
+    * @returns: Body of request result
+    *
+    * @throws HubSpot_Exception
+    **/
+    protected function execute_JSON_post_request($url, $body) {    //new
+        print_r("\n".$url);
+        print_r("\n".$body);
+        // intialize cURL and send POST data
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);    // new
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));    // new
+        $output = curl_exec($ch);
+        $errno = curl_errno($ch);
+        $error = curl_error($ch);
+        $this->setLastStatusFromCurl($ch);
+        curl_close($ch);
+        if ($errno > 0) {
+            throw new HubSpot_Exception ('cURL error: ' + $error);
+        } else {
+            return $output;
+        }
+    }
+
     /**
     * Executes HTTP POST request with XML as the POST body
     *
