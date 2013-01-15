@@ -25,6 +25,8 @@ require_once 'class.keywords.php';
 require_once 'class.blog.php';
 require_once 'class.contacts.php';
 require_once 'class.workflows.php';
+require_once 'class.forms.php';
+require_once 'class.lists.php';
 
 $HAPIKey = 'demo';
 /*
@@ -195,24 +197,24 @@ $HAPIKey = 'demo';
     echo $keywords->delete_keyword($addedGuid);
 */
 //Excercise Contacts API
-        $contacts = new HubSpot_Contacts($HAPIKey);
+/*    $contacts = new HubSpot_Contacts($HAPIKey);
 
-        $unique_email = 'testemail+'.uniqid().'@emailtest.com';
+    $unique_email = 'testemail+'.uniqid().'@emailtest.com';
         //Create Contact
-        $params =  array('email' => $unique_email, 'firstname' => 'Webster' );
-        $createdContact = $contacts->create_contact($params);
-        print_r($createdContact);
-        $newly_created_vid = $createdContact->{'vid'};
+    $params =  array('email' => $unique_email, 'firstname' => 'Webster' );
+    $createdContact = $contacts->create_contact($params);
+    print_r($createdContact);
+    $newly_created_vid = $createdContact->{'vid'};
 
         //Update Contact
-        $params =  array('lastname' => 'Gordon' );
-        $updatedContact = $contacts->update_contact($newly_created_vid,$params);
-        print_r($updatedContact);
+    $params =  array('lastname' => 'Gordon' );
+    $updatedContact = $contacts->update_contact($newly_created_vid,$params);
+    print_r($updatedContact);
 
         //Delete Contact
-        $deletedContact = $contacts->delete_contact($newly_created_vid);
-        print_r($deletedContact);
-/*
+    $deletedContact = $contacts->delete_contact($newly_created_vid);
+    print_r($deletedContact);
+
         //Get all Contacts
         $contacts_batch1 = $contacts->get_all_contacts();
         print_r($contacts_batch1);
@@ -276,4 +278,50 @@ $HAPIKey = 'demo';
         print_r($workflow_upcoming);
 
 */
-?>
+
+    //Exercise Forms API
+        $forms = new HubSpot_Forms($HAPIKey);
+        $uid = uniqid();
+        $form_data = array('name'=>'Test Form'.$uid, 'method'=>'POST', 'submitText'=>'Sign Up','notifyRecipients'=>'youremail@company.com' );
+        $fields = array(array('name'=>'firstname','label'=>'First Name','description'=>'test field','groupName'=>'contactInformation','type'=>'string','fieldType'=>'text',
+            'displayOrder'=>0,'required'=>'true','enabled'=>'true','hidden'=>'false','defaultValue'=>'','isSmartField'=>'false','options'=>null,'selectedOptions'=>null),
+        array('name'=>'email','label'=>'Email','groupName'=>'contactInformation','type'=>'string','fieldType'=>'text',
+            'displayOrder'=>1,'required'=>'true','enabled'=>'true','hidden'=>'false','defaultValue'=>'','options'=>null));
+
+        //Create a form
+        $new_form = $forms->create_form($form_data,$fields);
+        print_r($new_form);
+        $new_form_guid = $new_form->{'guid'};
+
+        //Get all forms
+        //$all_forms = $forms->get_forms();
+        //print_r($all_forms);
+
+
+        //Update Form
+        $update_form_data = array('name'=>'Updated test form name'.$uid);
+        $updated_form = $forms->update_form($new_form_guid,$update_form_data,$fields);
+        print_r($updated_form);
+
+        //Get Form by ID
+        $specific_form = $forms->get_form_by_id($new_form_guid);
+        print_r($specific_form);
+
+        //Get form fields
+        $form_fields = $forms->get_form_fields($new_form_guid);
+        print_r($form_fields);
+
+        //Get specific form field
+       // $specific_form_field = $forms->get_single_form_field($new_form_guid,'firstname');
+        //print_r($specific_form_field);
+
+        //Submit a form
+        $submitted_form_fields = array('firstname'=>'Webster','lastname'=>'Gordon','email'=>'newtestemail'.$uid.'@testing.com');
+        $hs_context = array('hutk'=>'12345678'.$uid,'ipAddress'=>'1.2.3.4','pageUrl'=>'http://demo.hubapi.com/contact',
+            'pageName'=>'Contact Us','redirectUrl'=>'http://demo.hubapi.com/thank-you');
+        $submitted_form = $forms->submit_form('62515',$new_form_guid,$submitted_form_fields,$hs_context);
+        print_r($submitted_form);
+
+    //Exercise Lists API
+        $lists = new HubSpot_Lists($HAPIKey);
+        ?>
