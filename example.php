@@ -322,6 +322,10 @@ $HAPIKey = 'demo';
         $submitted_form = $forms->submit_form('62515',$new_form_guid,$submitted_form_fields,$hs_context);
         print_r($submitted_form);
 
+        //Delete a Form
+        $deleted_form = $forms->delete_form($new_form_guid);
+        print_r($deleted_form);
+
     //Exercise Lists API
         $lists = new HubSpot_Lists($HAPIKey);
         ?>
