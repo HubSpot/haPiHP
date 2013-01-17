@@ -27,6 +27,7 @@ require_once 'class.contacts.php';
 require_once 'class.workflows.php';
 require_once 'class.forms.php';
 require_once 'class.lists.php';
+require_once 'class.properties.php';
 
 $HAPIKey = 'demo';
 /*
@@ -325,21 +326,21 @@ $HAPIKey = 'demo';
         //Delete a Form
         $deleted_form = $forms->delete_form($new_form_guid);
         print_r($deleted_form);
-*/
+
     //Exercise Lists API
         $lists = new HubSpot_Lists($HAPIKey);
 
         //Create a contact List
         $list_array = array('name'=>'Tweeters','dynamic'=>false,'portalId'=>'62515','filters'=>
-                            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'))));
+            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'))));
         $new_list = $lists->create_list($list_array);
         $list_id = $new_list->{'listId'};
         print_r($new_list);
 
         //Update a contact List
         $updated_list_array = array('name'=>'Tweeters and Hubspotters','dynamic'=>false,'portalId'=>'62515','filters'=>
-                            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'),
-                                array('operator'=>'EQ','value'=>'Hubspot','property'=>'company','type'=>'string'))));
+            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'),
+                array('operator'=>'EQ','value'=>'Hubspot','property'=>'company','type'=>'string'))));
         $updated_list = $lists->update_list($list_id,$updated_list_array);
         print_r($updated_list);
 
@@ -386,5 +387,51 @@ $HAPIKey = 'demo';
         //Delete List
         $deleted_list = $lists->delete_list($list_id);
         print_r($deleted_list);
+*/
+
+    //Exercise Properties API
+        $properties = new HubSpot_Properties($HAPIKey);
+
+        //Get all Properties
+        $all_props = $properties->get_all_properties();
+        print_r($all_props);
+
+        //Create new Property
+        $new_prop_info  = array('label'=>'Favorite Boston NBA Team','name'=>'favbostonnbateam','description'=>'Your favorite NBA team in the Boston Area',
+                            'groupName'=>'contactinformation','type'=>'enumeration','fieldType'=>'checkbox','formField'=>'true','displayOrder'=>0,   
+                            'options'=>array(array('label'=>'Boston Celtics','value'=>'Boston Celtics','displayOrder'=>0)));
+        $new_prop = $properties->create_property('favbostonnbateam',$new_prop_info);
+        print_r($new_prop);
+
+        //Update property
+        $updated_prop_info = array('label'=>'Favorite Boston NBA Team','name'=>'favbostonnbateam','description'=>'Your favorite NBA team in the Boston Area',
+                            'groupName'=>'contactinformation','type'=>'enumeration','fieldType'=>'checkbox','formField'=>'true','displayOrder'=>0,   
+                            'options'=>array(array('label'=>'Boston Celtics','value'=>'Boston Celtics','displayOrder'=>0),
+                                        array('label'=>'I do not watch basketball','value'=>'I do not watch basketball','displayOrder'=>1)));
+        $updated_prop = $properties->update_property('favbostonnbateam',$updated_prop_info);
+
+        //Delete property
+        $deleted_prop = $properties->delete_property('favbostonnbateam');
+        print_r($deleted_prop);
+
+        //Get Property Group
+        $group = $properties->get_property_group('contactinformation');
+        print_r($group);
+
+        //Create Property Group
+        $group_info = array('name'=>'newpropgroup','displayName'=>'A New Property Group','displayOrder'=>4);
+        $new_group = $properties->create_property_group('newpropgroup',$group_info);
+        print_r($new_group);
+
+        //Update Property Group
+        $updated_group_info = array('name'=>'newpropgroup','displayName'=>'A Newer Property Group','displayOrder'=>4);
+        $updated_group = $properties->update_property_group('newpropgroup',$updated_group_info);
+        print_r($updated_group);
+
+        //Delete Property Group
+        $deleted_group = $properties->delete_property_group('newpropgroup');
+        print_r($deleted_group);
+
+
 
         ?>
