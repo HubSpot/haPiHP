@@ -277,7 +277,7 @@ $HAPIKey = 'demo';
         $workflow_upcoming = $workflows->get_upcoming_events('23525','151421');
         print_r($workflow_upcoming);
 
-*/
+
 
     //Exercise Forms API
         $forms = new HubSpot_Forms($HAPIKey);
@@ -325,7 +325,66 @@ $HAPIKey = 'demo';
         //Delete a Form
         $deleted_form = $forms->delete_form($new_form_guid);
         print_r($deleted_form);
-
+*/
     //Exercise Lists API
         $lists = new HubSpot_Lists($HAPIKey);
+
+        //Create a contact List
+        $list_array = array('name'=>'Tweeters','dynamic'=>false,'portalId'=>'62515','filters'=>
+                            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'))));
+        $new_list = $lists->create_list($list_array);
+        $list_id = $new_list->{'listId'};
+        print_r($new_list);
+
+        //Update a contact List
+        $updated_list_array = array('name'=>'Tweeters and Hubspotters','dynamic'=>false,'portalId'=>'62515','filters'=>
+                            array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'),
+                                array('operator'=>'EQ','value'=>'Hubspot','property'=>'company','type'=>'string'))));
+        $updated_list = $lists->update_list($list_id,$updated_list_array);
+        print_r($updated_list);
+
+        //Get List by ID
+        print_r($lists->get_list($list_id));
+
+        //Get Lists
+        $some_lists = $lists->get_lists(array('offset'=>5));
+        var_dump($some_lists);
+
+        //Get Static Lists
+        $static_lists = $lists->get_static_lists(null);
+        print_r($static_lists);
+
+        //Get dynamic Lists
+        $dynamic_lists = $lists->get_dynamic_lists(null);
+        print_r($dynamic_lists);
+
+        //Get Contacts from List
+        $contacts_from_list = $lists->get_contacts_in_list(null,$list_id);
+        print_r($contacts_from_list);
+        if($contacts_from_list->{'has-more'}){
+            $next_contacts_batch = $lists->get_contacts_in_list(array('vidOffset'=>$contacts_from_list->{'vid-offset'}));
+            print_r($next_contacts_batch);
+        }
+
+        //Get recent Contacts from List
+        $recent_contacts = $lists->get_recent_contacts_in_list(null,$list_id);
+        print_r($recent_contacts);
+
+        //Refresh list
+        $refreshed_list = $lists->refresh_list($list_id);
+        print_r($refreshed_list);
+
+        //Add contact to List
+        $contacts_to_add = array(152842,152843);
+        $added_contacts = $lists->add_contacts_to_list($contacts_to_add,$list_id);
+        print_r($added_contacts);
+
+        //Remove contacts from List
+        $removed_contacts = $lists->remove_contacts_from_list(array(152842),$list_id);
+        print_r($removed_contacts);
+
+        //Delete List
+        $deleted_list = $lists->delete_list($list_id);
+        print_r($deleted_list);
+
         ?>
