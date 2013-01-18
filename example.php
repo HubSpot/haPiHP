@@ -28,6 +28,7 @@ require_once 'class.workflows.php';
 require_once 'class.forms.php';
 require_once 'class.lists.php';
 require_once 'class.properties.php';
+require_once 'class.socialmedia.php';
 
 $HAPIKey = 'demo';
 /*
@@ -387,7 +388,7 @@ $HAPIKey = 'demo';
         //Delete List
         $deleted_list = $lists->delete_list($list_id);
         print_r($deleted_list);
-*/
+
 
     //Exercise Properties API
         $properties = new HubSpot_Properties($HAPIKey);
@@ -432,6 +433,34 @@ $HAPIKey = 'demo';
         $deleted_group = $properties->delete_property_group('newpropgroup');
         print_r($deleted_group);
 
+*/
+    //Exercise Social Media API
+        $social = new HubSpot_SocialMedia($HAPIKey);
 
+        //Get Publishing Channels
+        $channels = $social->get_publishing_channels();
+        print_r($channels);
+
+        //Get specific Channel
+        $channel = $social->get_publishing_channel('7c13e300-e43f-3aa0-a842-93956cb214e9');
+        print_r($channel);
+
+        //Get Broadcasts
+        $broadcasts = $social->get_broadcasts(array('status'=>'success','since','1356036460644','count'=>'100'));
+        print_r($broadcasts);
+
+        //Get specific Broadcast
+        $broadcast = $social->get_broadcast('8c3dc6fb-2c7e-4719-b4b9-521794289cfc');
+        print_r($broadcast);
+
+        //Create a Broadcast
+        $new_broadcast = $social->create_broadcast(array('channelGuid'=>'7c13e300-e43f-3aa0-a842-93956cb214e9','triggerAt'=>strval(time()*1000+50000),
+                                                    'content'=>array('body'=>'Here is an awesome new Social Media message')));
+        print_r($new_broadcast);
+
+        //Cancel a Broadcast
+        $broadcast_guid = $new_broadcast->{'broadcastGuid'};
+        $deleted_broadcast = $social->cancel_broadcast($broadcast_guid);
+        print_r($deleted_broadcast);
 
         ?>
