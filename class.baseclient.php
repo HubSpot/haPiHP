@@ -153,6 +153,21 @@ class HubSpot_BaseClient {
     }
 
     /**
+    * Creates the url to be used for the api request for Forms API
+    *
+    * @param endpoint: String value for the endpoint to be used (appears after version in url)
+    * @param params: Array containing query parameters and values
+    *
+    * @returns String
+    **/
+    protected function get_forms_request_url($url_base,$params) {
+        $paramstring = $this->array_to_params($params);
+        return $url_base .
+               $this->KEY_PARAM . $this->HAPIKey .
+               $paramstring;
+    }
+
+    /**
     * Executes HTTP GET request
     *
     * @param URL: String value for the URL to GET
