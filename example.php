@@ -389,13 +389,13 @@ $HAPIKey = 'demo';
         $deleted_list = $lists->delete_list($list_id);
         print_r($deleted_list);
 
-
+*/
     //Exercise Properties API
-        $properties = new HubSpot_Properties($HAPIKey);
+        $properties = new HubSpot_Properties(null,'demooooo-oooo-oooo-oooo-oooooooooooo',null,null);
 
         //Get all Properties
         $all_props = $properties->get_all_properties();
-        print_r($all_props);
+          print_r($all_props);
 
         //Create new Property
         $new_prop_info  = array('label'=>'Favorite Boston NBA Team','name'=>'favbostonnbateam','description'=>'Your favorite NBA team in the Boston Area',
@@ -433,9 +433,10 @@ $HAPIKey = 'demo';
         $deleted_group = $properties->delete_property_group('newpropgroup');
         print_r($deleted_group);
 
-*/
+/*
+      
     //Exercise Social Media API
-        $social = new HubSpot_SocialMedia($HAPIKey);
+        $social = new HubSpot_SocialMedia(null,'demooooo-oooo-oooo-oooo-oooooooooooo');
 
         //Get Publishing Channels
         $channels = $social->get_publishing_channels();
@@ -462,5 +463,5 @@ $HAPIKey = 'demo';
         $broadcast_guid = $new_broadcast->{'broadcastGuid'};
         $deleted_broadcast = $social->cancel_broadcast($broadcast_guid);
         print_r($deleted_broadcast);
-
+*/
         ?>

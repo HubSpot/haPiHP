@@ -120,7 +120,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		$endpoint = 'properties/'.$name;
 
 		try{
-			return $this->new_execute_delete_request($this->get_request_url($endpoint,null));
+			return $this->execute_delete_request($this->get_request_url($endpoint,null));
 		}
 		catch(HubSpot_Exception $e){
 			print_r('Unable to delete property: '.$e);
