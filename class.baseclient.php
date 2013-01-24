@@ -66,7 +66,11 @@ class HubSpot_BaseClient {
     /**
     * Constructor.
     *
-    * @param $HAPIKey: String value of HubSpot API Key for requests
+    *@param HAPIKey: String value of HubSpot API Key for requests
+    *       access_token: String value of Hubspot OAuth Token               
+    *       refresh_token: String value of refresh token given initially for OAuth
+    *       client_id: Unique ID for your registered app
+    *
     **/
     public function __construct($HAPIKey=null, $access_token=null, $refresh_token=null,$client_id=null,$userAgent="haPiHP default UserAgent") {    // new
 
@@ -148,7 +152,7 @@ class HubSpot_BaseClient {
  }
 
     /**
-    * Creates the url to be used for the api request
+    * Creates the url to be used for the api request. If OAuth token is provided but invalid, will attempt a refresh.
     *
     * @param endpoint: String value for the endpoint to be used (appears after version in url)
     * @param params: Array containing query parameters and values
