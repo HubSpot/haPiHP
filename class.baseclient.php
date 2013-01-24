@@ -16,16 +16,22 @@
 * language governing permissions and limitations under the
 * License.
 */
+include('class.exception.php');
+
 class HubSpot_BaseClient {
     // HubSpot_BaseClient class to be extended by specific hapi clients
 
     // Declare variables
     protected $HAPIKey;
+    protected $ACCESS_TOKEN;
     protected $API_PATH;
+    protected $REFRESH_TOKEN;
+    protected $CLIENT_ID;
     protected $API_VERSION;
     protected $isTest = false;
     protected $PATH_DIV = '/';
-    protected $KEY_PARAM = '?hapikey=';
+    protected $API_KEY_PARAM = '?hapikey=';
+    protected $TOKEN_PARAM = '?access_token=';
     protected $PROD_DOMAIN = 'https://api.hubapi.com';
     protected $QA_DOMAIN = 'https://hubapiqa.com';
     protected $userAgent;    // new
@@ -62,8 +68,15 @@ class HubSpot_BaseClient {
     *
     * @param $HAPIKey: String value of HubSpot API Key for requests
     **/
-    public function __construct($HAPIKey,$userAgent="haPiHP default UserAgent") {    // new
-        $this->HAPIKey = $HAPIKey;
+    public function __construct($HAPIKey=null, $access_token=null, $refresh_token=null,$client_id=null,$userAgent="haPiHP default UserAgent") {    // new
+
+        if($HAPIKey AND $access_token){
+            throw new Exception("Cannot use hapikey and OAuth token", 1);
+        }
+        else{
+            $this->HAPIKey = $HAPIKey;
+            $this->ACCESS_TOKEN = $access_token;
+        }
         $this->userAgent = $userAgent;    // new
     }
 
@@ -127,12 +140,12 @@ class HubSpot_BaseClient {
     * @returns: String value of domain, including https protocol
     **/
     protected function get_domain() {
-       if ($this->isTest == true){
-           return $this->QA_DOMAIN;
-       } else {
-           return $this->PROD_DOMAIN;
-       }
-    }
+     if ($this->isTest == true){
+         return $this->QA_DOMAIN;
+     } else {
+         return $this->PROD_DOMAIN;
+     }
+ }
 
     /**
     * Creates the url to be used for the api request
@@ -144,12 +157,39 @@ class HubSpot_BaseClient {
     **/
     protected function get_request_url($endpoint,$params) {
         $paramstring = $this->array_to_params($params);
-        return $this->get_domain() . $this->PATH_DIV .
-               $this->get_api() . $this->PATH_DIV .
-               $this->get_api_version() . $this->PATH_DIV .
-               $endpoint .
-               $this->KEY_PARAM . $this->HAPIKey .
-               $paramstring;
+        if($this->HAPIKey){
+            return $this->get_domain() . $this->PATH_DIV .
+            $this->get_api() . $this->PATH_DIV .
+            $this->get_api_version() . $this->PATH_DIV .
+            $endpoint .
+            $this->KEY_PARAM . $this->HAPIKey .
+            $paramstring;
+        }
+        else{
+            if($this->check_auth()>=400){
+                try {
+                    $refreshed_token = $this->refresh_access_token($this->REFRESH_TOKEN,$this->CLIENT_ID);
+                    $this->ACCESS_TOKEN = $refreshed_token['access_token'];
+                    return $this->get_domain() . $this->PATH_DIV .
+                    $this->get_api() . $this->PATH_DIV .
+                    $this->get_api_version() . $this->PATH_DIV .
+                    $endpoint .
+                    $this->TOKEN_PARAM . $this->ACCESS_TOKEN .
+                    $paramstring;
+
+                } catch (HubSpot_Exception $e) {
+                    print_r('Unable to refresh the OAuth token. Please provide a valid access_token or refresh_token');
+                }
+            }
+            else{
+                return $this->get_domain() . $this->PATH_DIV .
+                $this->get_api() . $this->PATH_DIV .
+                $this->get_api_version() . $this->PATH_DIV .
+                $endpoint .
+                $this->TOKEN_PARAM . $this->ACCESS_TOKEN .
+                $paramstring;
+            }
+        }
     }
 
     /**
@@ -162,9 +202,16 @@ class HubSpot_BaseClient {
     **/
     protected function get_forms_request_url($url_base,$params) {
         $paramstring = $this->array_to_params($params);
-        return $url_base .
-               $this->KEY_PARAM . $this->HAPIKey .
-               $paramstring;
+        if($this->ACCESS_TOKEN){
+            return $url_base .
+            $this->TOKEN_PARAM . $this->ACCESS_TOKEN .
+            $paramstring;
+        }
+        else{
+            return $url_base .
+            $this->KEY_PARAM . $this->HAPIKey .
+            $paramstring;
+        }
     }
 
     /**
@@ -215,17 +262,17 @@ class HubSpot_BaseClient {
         curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);    // new
         if ($formenc)    // new
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));    // new
-        $output = curl_exec($ch);
-        $errno = curl_errno($ch);
-        $error = curl_error($ch);
-        $this->setLastStatusFromCurl($ch);
-        curl_close($ch);
-        if ($errno > 0) {
-            throw new HubSpot_Exception ('cURL error: ' + $error);
-        } else {
-            return $output;
+            $output = curl_exec($ch);
+            $errno = curl_errno($ch);
+            $error = curl_error($ch);
+            $this->setLastStatusFromCurl($ch);
+            curl_close($ch);
+            if ($errno > 0) {
+                throw new HubSpot_Exception ('cURL error: ' + $error);
+            } else {
+                return $output;
+            }
         }
-    }
 
         /**
     * Executes HTTP POST request with JSON as the POST body
@@ -401,11 +448,11 @@ class HubSpot_BaseClient {
         $paramstring = '';
         if ($params != null) {
             foreach ($params as $parameter => $value) {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
-            }
-        }
-        return $paramstring;
-    }
+               $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
+           }
+       }
+       return $paramstring;
+   }
 
     /**
     * Utility function used to determine if variable is empty
@@ -432,5 +479,66 @@ class HubSpot_BaseClient {
         $info = curl_getinfo($ch);
         $this->lastStatus = (isset($info['http_code'])) ? $info['http_code'] : null;
     }
+
+    /**
+    * Quick check of access_token
+    *
+    *
+    * @return: Response code for request
+    *
+    **/
+    protected function check_auth(){
+        $url = 'https://api.hubapi.com/contacts/v1/properties/email?access_token='.$this->ACCESS_TOKEN;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);  
+        $output = curl_exec($ch);
+        $response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $response_code;
+    }
+    /**
+    * Refresh OAuth token
+    *
+    * @param refresh_token: The refresh token for your portal
+    * @param client_id: Unique ID for your app, generated when the app is registered
+    *
+    * @return: Body of request result
+    *
+    * @throws HubSpot_Exception
+    **/
+    protected function refresh_access_token($refresh_token, $client_id){
+        if($refresh_token AND $client_id){
+            $url = 'https://api.hubapi.com/auth/v1/refresh';
+            $body = 'refresh_token='.$refresh_token.'&client_id='.$client_id.'&grant_type=refresh_token';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);    // new
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded')); 
+        $output = curl_exec($ch);
+        $apierr = curl_errno($ch);
+        $errmsg = curl_error($ch);
+        $response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        $output_array = json_decode($output);
+        if ($response_code<400) {
+            return $output_array;
+        } else {
+            throw new HubSpot_Exception("cURL error: " + $errmsg);
+            
+        }
+    }
+    else{
+        throw new HubSpot_Exception("Please provide a refresh_token and client_id");
+    }
+
+
+}
+
 
 }
