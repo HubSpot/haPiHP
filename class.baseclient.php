@@ -79,7 +79,9 @@ class HubSpot_BaseClient {
         }
         else{
             $this->HAPIKey = $HAPIKey;
+            print_r("HAPIKey:".$this->HAPIKey);
             $this->ACCESS_TOKEN = $access_token;
+            print_r("token:".$this->ACCESS_TOKEN);
         }
         $this->userAgent = $userAgent;    // new
     }
@@ -161,16 +163,20 @@ class HubSpot_BaseClient {
     **/
     protected function get_request_url($endpoint,$params) {
         $paramstring = $this->array_to_params($params);
+        echo $this->HAPIKey;
         if($this->HAPIKey){
+            print_r("Trying to use hapikey");
             return $this->get_domain() . $this->PATH_DIV .
             $this->get_api() . $this->PATH_DIV .
             $this->get_api_version() . $this->PATH_DIV .
             $endpoint .
-            $this->KEY_PARAM . $this->HAPIKey .
+            $this->API_KEY_PARAM . $this->HAPIKey .
             $paramstring;
         }
         else{
+            print "went to else";
             if($this->check_auth()>=400){
+                print_r("Auth check failed");
                 try {
                     $refreshed_token = $this->refresh_access_token($this->REFRESH_TOKEN,$this->CLIENT_ID);
                     $this->ACCESS_TOKEN = $refreshed_token['access_token'];
@@ -493,6 +499,7 @@ class HubSpot_BaseClient {
     **/
     protected function check_auth(){
         $url = 'https://api.hubapi.com/contacts/v1/properties/email?access_token='.$this->ACCESS_TOKEN;
+        print_r($url);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
