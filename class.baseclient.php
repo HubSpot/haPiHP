@@ -210,16 +210,8 @@ class HubSpot_BaseClient {
     **/
     protected function get_forms_request_url($url_base,$params) {
         $paramstring = $this->array_to_params($params);
-        if($this->ACCESS_TOKEN){
-            return $url_base .
-            $this->TOKEN_PARAM . $this->ACCESS_TOKEN .
-            $paramstring;
-        }
-        else{
-            return $url_base .
-            $this->KEY_PARAM . $this->HAPIKey .
-            $paramstring;
-        }
+        return $url_base .
+               $paramstring;
     }
 
     /**

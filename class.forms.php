@@ -48,7 +48,7 @@ class HubSpot_Forms extends HubSpot_Baseclient{
 		else{
 			return "Please make sure you are passing form_fields as an array";
 		}
-		$param_string = '&'.http_build_query($form_fields,'','&');
+		$param_string = '?'.http_build_query($form_fields,'','&');
 		try{
 			return json_decode($this->execute_post_request($this->get_forms_request_url($url_base,null),$param_string,TRUE));
 		}
