@@ -131,15 +131,15 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 
 
 	/**
-	* Delete specific Broadcast Message
+	* Cancel specific Broadcast Message
 	*
 	*@param guid: Unique ID for the broadcast
 	*
-	*@return returns response body for DELETE request
+	*@return returns response body for HTTP DELETE request
 	*
 	*@throws HubSpot_Exception
 	**/
-	public function delete_broadcast($guid){
+	public function cancel_broadcast($guid){
 		$endpoint = 'broadcasts/'.$guid;
 
 		try{
