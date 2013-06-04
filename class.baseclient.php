@@ -188,7 +188,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ( $errno > 0) {
-            throw new HubSpot_Exception('cURL error: ' + $error);
+            throw new HubSpot_Exception('cURL error: ' . $error);
         } else {
             return $output;
         }
@@ -221,7 +221,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($errno > 0) {
-            throw new HubSpot_Exception ('cURL error: ' + $error);
+            throw new HubSpot_Exception ('cURL error: ' . $error);
         } else {
             return $output;
         }
@@ -254,7 +254,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($errno > 0) {
-            throw new HubSpot_Exception ('cURL error: ' + $error);
+            throw new HubSpot_Exception ('cURL error: ' . $error);
         } else {
             return $output;
         }
@@ -287,7 +287,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($errno > 0) {
-            throw new HubSpot_Exception ('cURL error: ' + $error);
+            throw new HubSpot_Exception ('cURL error: ' . $error);
         } else {
             return $output;
         }
@@ -319,7 +319,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($apierr > 0) {
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         } else {
             return $result;
         }
@@ -351,7 +351,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($apierr > 0) {
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         } else {
             return $result;
         }
@@ -383,7 +383,7 @@ class HubSpot_BaseClient {
         $this->setLastStatusFromCurl($ch);
         curl_close($ch);
         if ($apierr > 0) {
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         } else {
             return $result;
         }
