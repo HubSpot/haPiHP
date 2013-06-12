@@ -312,26 +312,14 @@ class HubSpot_BaseClient {
             foreach ($params as $parameter => $value) {
               if(is_array($value)){
                 foreach($value as $subparam) {
-                  $paramstring = $paramstring . '&' . format_parameter_string($parameter, $subparam);
+                  $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($subparam);  
                 }
               } else {
-                $paramstring = $paramstring . '&' . format_parameter_string($parameter, $value); 
+                $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value); 
               }
             }
         }
         return $paramstring;
-    }
-
-    /**
-     * Utility function to format a paramter string
-     *
-     * @param parameter: the parameter
-     * @param value: the value
-     *
-     * @return String
-     **/
-    protected function format_parameter_string($parameter, $value) {
-      return $parameter . '=' . urlencode($value);
     }
 
     /**
