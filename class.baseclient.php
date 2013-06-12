@@ -310,10 +310,28 @@ class HubSpot_BaseClient {
         $paramstring = '';
         if ($params != null) {
             foreach ($params as $parameter => $value) {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
+              if(is_array($value)){
+                foreach($value as $subparam) {
+                  $paramstring = $paramstring . '&' . format_parameter_string($parameter, $subparam);
+                }
+              } else {
+                $paramstring = $paramstring . '&' . format_parameter_string($parameter, $value); 
+              }
             }
         }
         return $paramstring;
+    }
+
+    /**
+     * Utility function to format a paramter string
+     *
+     * @param parameter: the parameter
+     * @param value: the value
+     *
+     * @return String
+     **/
+    protected function format_parameter_string($parameter, $value) {
+      return $parameter . '=' . urlencode($value);
     }
 
     /**
