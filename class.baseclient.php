@@ -401,7 +401,13 @@ class HubSpot_BaseClient {
         $paramstring = '';
         if ($params != null) {
             foreach ($params as $parameter => $value) {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
+                if(is_array($value)){
+                    foreach($value as $subparam) {
+                        $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($subparam);  
+                    }
+                } else {
+                    $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value); 
+                }
             }
         }
         return $paramstring;
