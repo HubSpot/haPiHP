@@ -310,13 +310,13 @@ class HubSpot_BaseClient {
         $paramstring = '';
         if ($params != null) {
             foreach ($params as $parameter => $value) {
-              if(is_array($value)){
-                foreach($value as $subparam) {
-                  $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($subparam);  
+                if(is_array($value)){
+                    foreach($value as $subparam) {
+                        $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($subparam);  
+                    }
+                } else {
+                    $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value); 
                 }
-              } else {
-                $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value); 
-              }
             }
         }
         return $paramstring;
