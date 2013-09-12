@@ -238,8 +238,6 @@ class HubSpot_BaseClient {
     * @throws HubSpot_Exception
     **/
     protected function execute_JSON_post_request($url, $body) {    //new
-        print_r("\n".$url);
-        print_r("\n".$body);
         // intialize cURL and send POST data
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
