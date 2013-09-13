@@ -8,8 +8,9 @@ General API reference documentation: [http://developers.hubspot.com/docs](http:/
 
 ### Contributors
 
-This is a partial list in alphabetical order.
-
 * [adrianmott](https://github.com/adrianmott) (Adrian Mott)
 * [chrishoult](https://github.com/chrishoult) (Christopher Hoult)
 * [TheRealBenSmith](https://github.com/TheRealBenSmith) (Ben Smith)
+* [ajorgensen](https://github.com/ajorgensen) (Andrew Jorgensen)
+* [jprado](https://github.com/jprado)
+* [thinkclay](https://github.com/thinkclay) (Clayton McIlrath)
