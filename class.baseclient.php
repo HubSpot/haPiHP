@@ -228,7 +228,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception ('cURL error: ' . $error);
+            throw new HubSpot_Exception('cURL error: ' . $error);
         else
             return $output;
     }
@@ -260,7 +260,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception ('cURL error: ' . $error);
+            throw new HubSpot_Exception('cURL error: ' . $error);
         else
             return $output;
     }
@@ -292,7 +292,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception ('cURL error: ' + $error);
+            throw new HubSpot_Exception('cURL error: ' . $error);
         else
             return $output;
     }
@@ -324,7 +324,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         else
             return $result;
     }
@@ -356,7 +356,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         else
             return $result;
     }
@@ -388,7 +388,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' + $errmsg);
+            throw new HubSpot_Exception('cURL error: ' . $errmsg);
         else
             return $result;
     }
@@ -404,11 +404,21 @@ class HubSpot_BaseClient
     {
         $paramstring = '';
 
-        if ( $params != null )
+        if ( $params != NULL )
         {
             foreach ( $params as $parameter => $value )
             {
-                 $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
+                if ( is_array($value) )
+                {
+                    foreach ( $value as $subparam )
+                    {
+                        $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($subparam);
+                    }
+                }
+                else
+                {
+                    $paramstring = $paramstring . '&' . $parameter . '=' . urlencode($value);
+                }
             }
         }
 
