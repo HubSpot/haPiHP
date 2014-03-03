@@ -296,7 +296,7 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 			return $this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($request_body));
 		}
 		catch(HubSpot_Exception $e){
-			print_r("Unable to add contacts: ".$e);
+			print_r("Unable to remove contacts: ".$e);
 		}
 	}
 

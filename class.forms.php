@@ -37,8 +37,18 @@ class HubSpot_Forms extends HubSpot_Baseclient{
 	**/
 	public function submit_form($portalId, $guid, $form_fields, $hs_context){
 		$url_base = 'https://forms.hubspot.com/uploads/form/v2/'.$portalId.'/'.$guid;
-		$form_fields['hs_context'] = json_encode($hs_context);
-		$param_string = '&'.http_build_query($form_fields,'','&');
+		if(is_array($form_fields)){
+			if(is_array($hs_context)){
+				$form_fields['hs_context'] = json_encode($hs_context);
+			}
+			else{
+				return "Please make sure you are passing hs_context as an array";
+			}
+		}
+		else{
+			return "Please make sure you are passing form_fields as an array";
+		}
+		$param_string = '?'.http_build_query($form_fields,'','&');
 		try{
 			return json_decode($this->execute_post_request($this->get_forms_request_url($url_base,null),$param_string,TRUE));
 		}
