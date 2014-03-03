@@ -108,8 +108,6 @@ class HubSpot_Forms extends HubSpot_Baseclient{
 	public function create_form($form_data, $fields){
 		$endpoint = 'forms';
 		$form_data['fields'] = $fields;
-		print_r(json_encode($form_data));
-		print_r($this->get_request_url($endpoint,null));
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($form_data)));
 		}
