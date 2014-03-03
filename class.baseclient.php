@@ -64,6 +64,7 @@ class HubSpot_BaseClient {
     const STATUS_NOT_FOUND = 404;
 
     /**
+<<<<<<< HEAD
      * Constructor.
      *
      * @param HAPIKey: String value of HubSpot API Key for requests
@@ -78,10 +79,39 @@ class HubSpot_BaseClient {
             throw new Exception( "Cannot use hapikey and OAuth token", 1 );
         }
         else {
+=======
+    * Constructor.
+    *
+    *@param auth: array with the following optional parameters. Either an API key or and OAuth token must be used for authentication.
+    *           HAPIKey: String value of HubSpot API Key for requests
+    *           access_token: String value of Hubspot OAuth Token               
+    *           refresh_token: String value of refresh token given initially for OAuth
+    *           client_id: Unique ID for your registered app
+    *
+    **/
+    public function __construct($auth,$userAgent="haPiHP default UserAgent") {    // new
+
+        if(isset($auth['HAPIKey']) AND isset($auth['access_token'])){
+            throw new Exception("Cannot use hapikey and OAuth token", 1);
+        }
+        else{
+<<<<<<< HEAD
+            $auth += array('HAPIKey'=>null,'access_token'=>null,'refresh_token'=>null,'client_id'=>null);
+            $this->HAPIKey = $auth['HAPIKey'];
+            $this->ACCESS_TOKEN = $auth['access_token'];
+            $this->REFRESH_TOKEN = $auth['refresh_token'];
+            $this->CLIENT_ID = $auth['client_id'];
+=======
+>>>>>>> array_param
             $this->HAPIKey = $HAPIKey;
             print_r( "HAPIKey:".$this->HAPIKey );
             $this->ACCESS_TOKEN = $access_token;
+<<<<<<< HEAD
             print_r( "token:".$this->ACCESS_TOKEN );
+=======
+            print_r("token:".$this->ACCESS_TOKEN);
+>>>>>>> master
+>>>>>>> array_param
         }
         $this->userAgent = $userAgent;
 
@@ -207,6 +237,7 @@ class HubSpot_BaseClient {
                     $paramstring;
             }
         }
+<<<<<<< HEAD
         /*
      * Returns the hapi domain to use for requests based on isTesting
      *
@@ -233,6 +264,23 @@ class HubSpot_BaseClient {
             return $this->get_domain() . $this->PATH_DIV.$this->get_api() . $this->PATH_DIV . $this->get_api_version() .
                 $this->PATH_DIV . $endpoint . $this->KEY_PARAM . $this->HAPIKey . $paramstring;
         }
+=======
+    }
+
+    /**
+    * Creates the url to be used for the api request for Forms API
+    *
+    * @param endpoint: String value for the endpoint to be used (appears after version in url)
+    * @param params: Array containing query parameters and values
+    *
+    * @returns String
+    **/
+    protected function get_forms_request_url($url_base,$params) {
+        $paramstring = $this->array_to_params($params);
+        return $url_base .
+               $paramstring;
+    }
+>>>>>>> array_param
 
         /**
          * Creates the url to be used for the api request for Forms API
