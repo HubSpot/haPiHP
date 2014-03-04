@@ -31,6 +31,7 @@ require_once 'class.properties.php';
 require_once 'class.socialmedia.php';
 
 $HAPIKey = 'demo';
+$access_token = 'demooooo-oooo-oooo-oooo-oooooooooooo';
 /*
 //Exercise Blog API
     $blogs = new HubSpot_Blog($HAPIKey);
@@ -327,9 +328,9 @@ $HAPIKey = 'demo';
         //Delete a Form
         $deleted_form = $forms->delete_form($new_form_guid);
         print_r($deleted_form);
-
+*/
     //Exercise Lists API
-        $lists = new HubSpot_Lists($HAPIKey);
+        $lists = new HubSpot_Lists(array('access_token'=>$access_token));
 
         //Create a contact List
         $list_array = array('name'=>'Tweeters','dynamic'=>false,'portalId'=>'62515','filters'=>
@@ -337,7 +338,7 @@ $HAPIKey = 'demo';
         $new_list = $lists->create_list($list_array);
         $list_id = $new_list->{'listId'};
         print_r($new_list);
-
+ 
         //Update a contact List
         $updated_list_array = array('name'=>'Tweeters and Hubspotters','dynamic'=>false,'portalId'=>'62515','filters'=>
             array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'),
@@ -391,11 +392,11 @@ $HAPIKey = 'demo';
 
 
     //Exercise Properties API
-        $properties = new HubSpot_Properties($HAPIKey);
+        $properties = new HubSpot_Properties(array('HAPIKey'=>$HAPIKey));
 
         //Get all Properties
         $all_props = $properties->get_all_properties();
-        print_r($all_props);
+          print_r($all_props);
 
         //Create new Property
         $new_prop_info  = array('label'=>'Favorite Boston NBA Team','name'=>'favbostonnbateam','description'=>'Your favorite NBA team in the Boston Area',
@@ -433,9 +434,10 @@ $HAPIKey = 'demo';
         $deleted_group = $properties->delete_property_group('newpropgroup');
         print_r($deleted_group);
 
-*/
+
+ /*    
     //Exercise Social Media API
-        $social = new HubSpot_SocialMedia($HAPIKey);
+        $social = new HubSpot_SocialMedia(array('access_token'=>'demooooo-oooo-oooo-oooo-oooooooooooo'));
 
         //Get Publishing Channels
         $channels = $social->get_publishing_channels();
@@ -462,5 +464,5 @@ $HAPIKey = 'demo';
         $broadcast_guid = $new_broadcast->{'broadcastGuid'};
         $deleted_broadcast = $social->cancel_broadcast($broadcast_guid);
         print_r($deleted_broadcast);
-
+*/
         ?>
