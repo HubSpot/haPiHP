@@ -28,9 +28,9 @@ $params = array(
 	'vidOffset' => '50' // contact offset used for paging
 );
 
-// get 5 contacts' firstnames, offset by 50
 $hubspot = new Fungku\HubSpot\HubSpot;
 
+// get 5 contacts' firstnames, offset by 50
 $contacts = $hubspot->contacts($hapikey)
 	->get_all_contacts($params);
 ```
