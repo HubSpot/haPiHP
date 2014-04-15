@@ -17,27 +17,27 @@ use Fungku\HubSpot\API\Workflows;
 
 class HubSpot {
 	
-	public function blog() { return new Blog();	}
+	public function blog($HAPIKey) { return new Blog($HAPIKey);	}
 
-	public function contacts() { return new Contacts();	}
+	public function contacts($HAPIKey) { return new Contacts($HAPIKey);	}
 
-	public function forms() { return new Forms(); }
+	public function forms($HAPIKey) { return new Forms($HAPIKey); }
 
-	public function keywords() { return new Keywords();	}
+	public function keywords($HAPIKey) { return new Keywords($HAPIKey);	}
 
-	public function leadNurturing() { return new LeadNurturing(); }
+	public function leadNurturing($HAPIKey) { return new LeadNurturing($HAPIKey); }
 
-	public function leads() { return new Leads(); }
+	public function leads($HAPIKey) { return new Leads($HAPIKey); }
 
-	public function lists() { return new Lists(); }
+	public function lists($HAPIKey) { return new Lists($HAPIKey); }
 
-	public function marketPlace() { return new MarketPlace(); }
+	public function marketPlace($HAPIKey) { return new MarketPlace($HAPIKey); }
 
-	public function properties() { return new Properties();	}
+	public function properties($HAPIKey) { return new Properties($HAPIKey);	}
 
-	public function settings() { return new Settings(); }
+	public function settings($HAPIKey) { return new Settings($HAPIKey); }
 
-	public function socialMedia() { return new SocialMedia(); }
+	public function socialMedia($HAPIKey) { return new SocialMedia($HAPIKey); }
 
-	public function workflows() { return new WorkFlows(); }
+	public function workflows($HAPIKey) { return new WorkFlows($HAPIKey); }
 }

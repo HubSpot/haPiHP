@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Fungku\\Hubspot": "src/"
+            "Fungku\\HubSpot": "src/"
         }
     },
     "minimum-stability": "stable"
