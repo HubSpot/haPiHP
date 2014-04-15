@@ -1,0 +1,20 @@
+{
+    "name": "fungku/hubspot",
+    "description": "",
+    "authors": [
+        {
+            "name": "fungku",
+            "email": "fungku@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Fungku\\Hubspot": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
