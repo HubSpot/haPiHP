@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Blog extends HubSpot_BaseClient {
+class Blog extends BaseClient {
     //Client for HubSpot Blog API.
 
     //Define required client variables
@@ -34,7 +36,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_blogs($params, $content_type) {
         $endpoint = 'list.' . $content_type;
@@ -42,17 +44,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint,$params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -66,7 +68,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_blog($params, $guid, $content_type) {
         $endpoint = $guid . '.' . $content_type;
@@ -74,17 +76,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -98,7 +100,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_posts($params, $guid, $content_type) {
         $endpoint = $guid . '/posts.' . $content_type;
@@ -106,17 +108,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -130,7 +132,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_comments($params, $guid, $content_type) {
         $endpoint = $guid . '/comments.' . $content_type;
@@ -138,17 +140,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -162,7 +164,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_post($params, $guid, $content_type) {
         $endpoint = 'posts/' . $guid . '.' . $content_type;
@@ -170,17 +172,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -194,7 +196,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_post_comments($params, $post_guid, $content_type) {
         $endpoint = 'posts/' . $post_guid . '/comments.' . $content_type;
@@ -202,17 +204,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -226,7 +228,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns list of blogs in JSON or XML format.
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_comment($params, $comment_guid, $content_type) {
         $endpoint = 'comments/' . $comment_guid . '.' . $content_type;
@@ -234,17 +236,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
         if ($content_type == 'json') {
             try {
                 return json_decode($this->execute_get_request($this->get_request_url($endpoint, $params)));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else if ($content_type == 'atom') {
             try {
                 return $this->execute_get_request($this->get_request_url($endpoint, $params));
-            } catch (HubSpot_Exception $e) {
-                throw new HubSpot_Exception('Unable to retrieve blogs: ' . $e);
+            } catch (HubSpotException $e) {
+                throw new HubSpotException('Unable to retrieve blogs: ' . $e);
             }
         } else {
-            throw new HubSpot_Exception('Invalid content type, please choose either "json" or "atom"');
+            throw new HubSpotException('Invalid content type, please choose either "json" or "atom"');
         }
     }
 
@@ -264,17 +266,17 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function create_post($blog_guid, $author_name, $author_email, $title, $summary, $post_content, $tags) {
         $endpoint = $blog_guid . '/posts.atom';
 
         if ($this->isBlank($title)) {
-            throw new HubSpot_Exception('Blog title is required!');
+            throw new HubSpotException('Blog title is required!');
         } else if ($this->isBlank($post_content)) {
-            throw new HubSpot_Exception('Blog content is required!');
+            throw new HubSpotException('Blog content is required!');
         } else if ($this->isBlank($author_email)) {
-            throw new HubSpot_Exception('Author email is required!');
+            throw new HubSpotException('Author email is required!');
         }
 
         $tag_to_input = '';
@@ -296,8 +298,8 @@ class HubSpot_Blog extends HubSpot_BaseClient {
 
         try {
             return $this->execute_xml_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add blog post: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add blog post: ' . $e);
         }
     }
 
@@ -315,13 +317,13 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function update_post($post_guid, $title, $summary, $post_content, $tags, $meta_desc, $keywords) {
         $endpoint = 'posts/' . $post_guid . '.atom';
 
         if ($this->isBlank($post_guid)) {
-            throw new HubSpot_Exception('Post guid is required!');
+            throw new HubSpotException('Post guid is required!');
         }
 
         $tag_to_input = '';
@@ -346,8 +348,8 @@ class HubSpot_Blog extends HubSpot_BaseClient {
 
         try {
             return $this->execute_xml_put_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to update blog post: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to update blog post: ' . $e);
         }
     }
 
@@ -361,13 +363,13 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function publish_post($post_guid, $publish_time, $should_notify) {
         $endpoint = 'posts/' . $post_guid . '.atom';
 
         if ($this->isBlank($post_guid)) {
-            throw new HubSpot_Exception('Post guid is required!');
+            throw new HubSpotException('Post guid is required!');
         }
 
         $body = '<?xml version="1.0" encoding="utf-8"?>
@@ -379,8 +381,8 @@ class HubSpot_Blog extends HubSpot_BaseClient {
 
         try {
             return $this->execute_xml_put_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to publish blog post: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to publish blog post: ' . $e);
         }
     }
 
@@ -395,7 +397,7 @@ class HubSpot_Blog extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function create_comment($post_guid, $author_name, $author_email, $url, $comment) {
         $endpoint = 'posts/' . $post_guid . '/comments.atom';
@@ -412,8 +414,8 @@ class HubSpot_Blog extends HubSpot_BaseClient {
 
         try {
             return $this->execute_xml_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add blog post: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add blog post: ' . $e);
         }
     }
 }

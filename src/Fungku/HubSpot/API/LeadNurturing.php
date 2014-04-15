@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_LeadNurturing extends HubSpot_BaseClient {
+class LeadNurturing extends BaseClient {
     //Client for HubSpot Lead Nurturing API.
 
     //Define required client variables
@@ -31,7 +33,7 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     * @param excludeInactive: Boolean that excludes inactive campaigns when true
     * @returns Array of Campaigns as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_campaigns($excludeInactive) {
         $endpoint = 'campaigns';
@@ -42,8 +44,8 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
         }
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve campaigns: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve campaigns: ' . $e);
         }
     }
 
@@ -53,14 +55,14 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     * @param campaignGuid: String value of guid of campaign to list
     * @returns Array of Campaign Members as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_campaign_members($campaignGuid) {
         $endpoint = 'campaign/' . $campaignGuid . '/list';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve campaign members: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve campaign members: ' . $e);
         }
     }
 
@@ -70,14 +72,14 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     * @param leadGuid: String value of guid of lead to list
     * @returns Array of Campaign Members as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_campaign_history($leadGuid) {
         $endpoint = 'lead/' . $leadGuid;
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve campaign history: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve campaign history: ' . $e);
         }
     }
 
@@ -88,15 +90,15 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     * @param leadGuid: String value of guid of lead to add to campaign
     * @returns POST request body
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function enroll_lead_in_campaign($campaignGuid, $leadGuid) {
         $endpoint = 'campaign/' . $campaignGuid . '/add';
         $body = $leadGuid;
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add lead to campaign: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add lead to campaign: ' . $e);
         }
     }
 
@@ -107,15 +109,15 @@ class HubSpot_LeadNurturing extends HubSpot_BaseClient {
     * @param leadGuid: String value of guid of lead to remove from campaign
     * @returns POST request body
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function remove_lead_from_campaign($campaignGuid, $leadGuid) {
         $endpoint = 'campaign/' . $campaignGuid . '/remove';
         $body = $leadGuid;
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to remove lead to campaign: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to remove lead to campaign: ' . $e);
         }
     }
 

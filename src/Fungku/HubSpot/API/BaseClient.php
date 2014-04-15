@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,10 @@
 * language governing permissions and limitations under the
 * License.
 */
-class HubSpot_BaseClient
+
+class BaseClient
 {
-    // HubSpot_BaseClient class to be extended by specific hapi clients
+    // BaseClient class to be extended by specific hapi clients
 
     // Declare variables
     protected $HAPIKey;
@@ -81,32 +85,32 @@ class HubSpot_BaseClient
 
     /**
      * Returns API_PATH that is set in specific hapi clients.  All
-     * clients that extend HubSpot_BaseClient should set $API_PATH to the
+     * clients that extend BaseClient should set $API_PATH to the
      * base path for the API (e.g.: the leads api sets the value to
      * 'leads')
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function get_api()
     {
         if ( $this->isBlank($this->API_PATH) )
-            throw new HubSpot_Exception('API_PATH must be defined');
+            throw new HubSpotException('API_PATH must be defined');
         else
             return $this->API_PATH;
     }
 
     /**
      * Returns API_VERSION that is set in specific hapi clients. All
-     * clients that extend HubSpot_BaseClient should set $API_VERSION to the
+     * clients that extend BaseClient should set $API_VERSION to the
      * version that the client is developed for (e.g.: the leads v1
      * client sets the value to 'v1')
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function get_api_version()
     {
         if ( $this->isBlank($this->API_VERSION) )
-            throw new HubSpot_Exception('API_VERSION must be defined');
+            throw new HubSpotException('API_VERSION must be defined');
         else
             return $this->API_VERSION;
     }
@@ -175,7 +179,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_get_request($url)
     {
@@ -191,7 +195,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $error);
+            throw new HubSpotException('cURL error: ' . $error);
         else
             return $output;
     }
@@ -204,7 +208,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_post_request($url, $body, $formenc = FALSE)
     {
@@ -228,7 +232,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $error);
+            throw new HubSpotException('cURL error: ' . $error);
         else
             return $output;
     }
@@ -241,7 +245,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_JSON_post_request($url, $body)
     {
@@ -260,7 +264,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $error);
+            throw new HubSpotException('cURL error: ' . $error);
         else
             return $output;
     }
@@ -273,7 +277,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_xml_post_request($url, $body)
     {
@@ -292,7 +296,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $errno > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $error);
+            throw new HubSpotException('cURL error: ' . $error);
         else
             return $output;
     }
@@ -305,7 +309,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_put_request($url, $body)
     {
@@ -324,7 +328,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $errmsg);
+            throw new HubSpotException('cURL error: ' . $errmsg);
         else
             return $result;
     }
@@ -337,7 +341,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_xml_put_request($url, $body)
     {
@@ -356,7 +360,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $errmsg);
+            throw new HubSpotException('cURL error: ' . $errmsg);
         else
             return $result;
     }
@@ -369,7 +373,7 @@ class HubSpot_BaseClient
      *
      * @return Body of request result
      *
-     * @throws HubSpot_Exception
+     * @throws HubSpotException
      */
     protected function execute_delete_request($url, $body)
     {
@@ -388,7 +392,7 @@ class HubSpot_BaseClient
         curl_close($ch);
 
         if ( $apierr > 0 )
-            throw new HubSpot_Exception('cURL error: ' . $errmsg);
+            throw new HubSpotException('cURL error: ' . $errmsg);
         else
             return $result;
     }

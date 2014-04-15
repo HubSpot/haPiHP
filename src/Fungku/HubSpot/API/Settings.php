@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Settings extends HubSpot_BaseClient {
+class Settings extends BaseClient {
     //Client for HubSpot Settings API.
 
     //Define required client variables
@@ -30,14 +32,14 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Array of Settings as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_settings() {
         $endpoint = 'settings';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve settings: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve settings: ' . $e);
         }
     }
 
@@ -48,15 +50,15 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Setting as stdObject
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_setting($settingName) {
         $endpoint = 'settings';
         $params = array('name'=>$settingName);
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve setting: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve setting: ' . $e);
         }
     }
 
@@ -68,7 +70,7 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function update_setting($settingName, $value) {
         $endpoint = 'settings';
@@ -76,8 +78,8 @@ class HubSpot_Settings extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to update setting: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to update setting: ' . $e);
         }
 
     }
@@ -89,7 +91,7 @@ class HubSpot_Settings extends HubSpot_BaseClient {
     *
     * @returns Body of DELETE request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function delete_setting($settingName) {
         $endpoint = 'settings';
@@ -97,8 +99,8 @@ class HubSpot_Settings extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_delete_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to delete setting: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to delete setting: ' . $e);
         }
     }
 }

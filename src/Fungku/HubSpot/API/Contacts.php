@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2013 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Contacts extends HubSpot_BaseClient{
+class Contacts extends BaseClient {
 	//Client for HubSpot Contacts API
 
 	    //Define required client variables
@@ -34,7 +36,7 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
     * @return Response body with JSON object 
     * for created Contact from HTTP POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function create_contact($params){
     	$endpoint = 'contact';
@@ -45,8 +47,8 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
     	$properties = json_encode(array("properties"=>$properties));
     	try{
     		return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),$properties));
-    	} catch (HubSpot_Exception $e) {
-    		throw new HubSpot_Exception('Unable to create contact: ' . $e);
+    	} catch (HubSpotException $e) {
+    		throw new HubSpotException('Unable to create contact: ' . $e);
     	}
     }
 
@@ -57,7 +59,7 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
     *
     * @return Response body from HTTP POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function update_contact($vid, $params){
     	$endpoint = 'contact/vid/'.$vid.'/profile';
@@ -68,8 +70,8 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
     	$properties = json_encode(array("properties"=>$properties));
     	try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),$properties));
-    	} catch (HubSpot_Exception $e) {
-    		throw new HubSpot_Exception('Unable to update contact: ' . $e);
+    	} catch (HubSpotException $e) {
+    		throw new HubSpotException('Unable to update contact: ' . $e);
     	}
     }
 
@@ -80,15 +82,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function delete_contact($vid){
     	$endpoint = 'contact/vid/'.$vid;
     	try{
     		return json_decode($this->execute_delete_request($this->get_request_url($endpoint,null),null));
     	}
-    	catch (HubSpot_Exception $e) {
-    		throw new HubSpot_Exception('Unable to delete contact: ' . $e);
+    	catch (HubSpotException $e) {
+    		throw new HubSpotException('Unable to delete contact: ' . $e);
     	}
     }
 
@@ -99,15 +101,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON objects for all Contacts in portal
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_all_contacts($params){
     	$endpoint = 'lists/all/contacts/all';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contacts: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contacts: '.$e);
     	}
     }
 
@@ -118,15 +120,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON objects for recently updated Contacts in portal
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_recent_contacts($params){
     	$endpoint = 'lists/recently_updated/contacts/recent';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contacts: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contacts: '.$e);
     	}
     }
 
@@ -137,15 +139,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON object for requested Contact
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_contact_by_id($vid){
     	$endpoint = 'contact/vid/'.$vid.'/profile';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contact: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contact: '.$e);
     	}
     }
 
@@ -156,15 +158,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON object for requested contact
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_contact_by_email($email){
     	$endpoint = 'contact/email/'.$email.'/profile';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contact: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contact: '.$e);
     	}
     }
 
@@ -175,15 +177,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON object for requested contact
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_contact_by_usertoken($token){
     	$endpoint = 'contact/utk/'.$token.'/profile';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contact: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contact: '.$e);
     	}
     }
 
@@ -194,15 +196,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON object for requested contact
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function search_contacts($params){
     	$endpoint = 'search/query';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception("Unable to search contacts: ".$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException("Unable to search contacts: ".$e);
     		
     	}
     }
@@ -213,15 +215,15 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
 	*
 	* @return JSON object with Contacts statistics
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
     **/
     public function get_contacts_statistics(){
     	$endpoint = 'contacts/statistics';
     	try{
     		return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
     	}
-    	catch(HubSpot_Exception $e){
-    		throw new HubSpot_Exception('Unable to get contact: '.$e);
+    	catch(HubSpotException $e){
+    		throw new HubSpotException('Unable to get contact: '.$e);
     	}
 
     }

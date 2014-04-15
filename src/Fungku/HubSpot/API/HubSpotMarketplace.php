@@ -1,5 +1,7 @@
 <?php
 
+namespace Fungku\HubSpot\API;
+
 class HubSpotMarketplace{
 
     protected $appSecret;

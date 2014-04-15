@@ -1,4 +1,7 @@
 <?php
+
+namespace Fungku\HubSpot\API;
+
 /**
 * Copyright 2013 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_SocialMedia extends HubSpot_Baseclient{
+class SocialMedia extends Baseclient{
 
 	protected $API_PATH = 'broadcast';
 	protected $API_VERSION = 'v1';
@@ -30,7 +32,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns objects for each publishing channel
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function get_publishing_channels(){
 		$endpoint = 'channels/setting/publish/current';
@@ -38,7 +40,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve channels: '.$e);
 		}
 	}
@@ -50,7 +52,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns object for requested publishing channel
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function get_publishing_channel($guid){
 		$endpoint = 'channels/'.$guid;
@@ -58,7 +60,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve channel: '.$e);
 		}
 
@@ -72,7 +74,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns objects for requested broadcasts
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function get_broadcasts($params){
 		$endpoint = 'broadcasts';
@@ -80,7 +82,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve broadcasts: '.$e);
 		}
 	}
@@ -92,7 +94,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns object for requested broadcast message
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function get_broadcast($guid){
 		$endpoint = 'broadcasts/'.$guid;
@@ -100,7 +102,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve broadcast: '.$e);
 		}
 
@@ -116,7 +118,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns object for the created broadcast message
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function create_broadcast($broadcast){
 		$endpoint = 'broadcasts';
@@ -124,7 +126,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($broadcast)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to create broadcast: '.$e);
 		}
 	}
@@ -137,7 +139,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 	*
 	*@return returns response body for DELETE request
 	*
-	*@throws HubSpot_Exception
+	*@throws HubSpotException
 	**/
 	public function delete_broadcast($guid){
 		$endpoint = 'broadcasts/'.$guid;
@@ -145,7 +147,7 @@ class HubSpot_SocialMedia extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_delete_request($this->get_request_url($endpoint,null),null));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to delete broadcast: '.$e);
 		}
 
