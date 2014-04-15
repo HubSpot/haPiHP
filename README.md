@@ -1,3 +1,23 @@
+# HubSpot PHP API client
+
+## Example
+
+This is how I use it.
+
+```php
+$hapikey = "demo";
+
+$params = array(
+	'count' => 5, // defaults to 20
+	'property' => 'firstname', // only get the specified properties
+	'vidOffset' => '50' // contact offset used for paging
+);
+
+// get 5 contacts' firstnames, offset by 50
+$contacts = HubSpot::contacts($hapikey)
+	->get_all_contacts($params);
+```
+
 ## haPiHP
 
 ### Overview
