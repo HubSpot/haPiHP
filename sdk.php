@@ -28,7 +28,7 @@
  * @param string $className
  */
 function hubspot_autoload($className) {
-	if (strpos($className, 'HubSpot_') == 0) {
+	if (strpos($className, 'HubSpot_') === 0) {
 		$className = strtolower(str_replace('HubSpot_', '', $className));
 		$file = 'class.' . $className . '.php';
 		include __DIR__ . DIRECTORY_SEPARATOR . $file;
