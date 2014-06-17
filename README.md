@@ -12,14 +12,14 @@ $params = array(
 	'vidOffset' => '50' // contact offset used for paging
 );
 
-$hubspot = new Fungku\HubSpot\HubSpot($hapikey);
+$hubspot = new Fungku\HubSpot($hapikey);
 
 // get 5 contacts' firstnames, offset by 50
 $contacts = $hubspot->contacts()
 	->get_all_contacts($params);
 ```
 
-Note: The Hubspot class checks for `HUBSPOT_APIKEY` environment variable if you don't include one during instantiation.
+*Note:* The Hubspot class checks for a `HUBSPOT_APIKEY` environment variable if you don't include one during instantiation.
 
 
 ### haPiHP

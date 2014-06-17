@@ -1,4 +1,4 @@
-<?php namespace Fungku\HubSpot;
+<?php namespace Fungku;
 
 use Fungku\HubSpot\API\Blog;
 use Fungku\HubSpot\API\Contacts;
@@ -14,12 +14,12 @@ use Fungku\HubSpot\API\SocialMedia;
 use Fungku\HubSpot\API\Workflows;
 
 class HubSpot {
-    
+
     private $hapikey;
-    
+
     function __construct($hapikey = null)
     {
-        if ( ! $hapikey)
+        if (is_null($hapikey))
         {
             $this->hapikey = getenv('HUBSPOT_APIKEY');
         }
@@ -28,7 +28,7 @@ class HubSpot {
             $this->hapikey = $hapikey;
         }
     }
-    
+
     public function blog() { return new Blog($this->hapikey); }
 
     public function contacts() { return new Contacts($this->hapikey); }
