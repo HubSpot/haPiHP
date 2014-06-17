@@ -2,7 +2,6 @@
 
 ## Example
 
-This is how I use it.
 
 ```php
 $hapikey = "demo";
@@ -13,27 +12,14 @@ $params = array(
 	'vidOffset' => '50' // contact offset used for paging
 );
 
+$hubspot = new Fungku\HubSpot\HubSpot($hapikey);
+
 // get 5 contacts' firstnames, offset by 50
-$contacts = HubSpot::contacts($hapikey)
+$contacts = $hubspot->contacts()
 	->get_all_contacts($params);
 ```
 
-If you dont use the ServiceProvider or Facades you can also use it like this:
-```php
-$hapikey = "demo";
-
-$params = array(
-	'count' => 5, // defaults to 20
-	'property' => 'firstname', // only get the specified properties
-	'vidOffset' => '50' // contact offset used for paging
-);
-
-$hubspot = new Fungku\HubSpot\HubSpot;
-
-// get 5 contacts' firstnames, offset by 50
-$contacts = $hubspot->contacts($hapikey)
-	->get_all_contacts($params);
-```
+Note: The Hubspot class checks for `HUBSPOT_APIKEY` environment variable if you don't include one during instantiation.
 
 
 ### haPiHP
