@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -30,9 +30,9 @@ class Forms extends Baseclient{
 	*
 	*@param portalId: The ID # for your portal
 	*		guid: The unique ID for the form (found in Forms tool in your HubSpot account)
-	*		form_fields: A key-value array of the form fields submitted by the end user. 
-	*					 The key should match the key for the contact property in HubSpot. 
-	*		hs_context: A key-value array of the contextual info for the submission 
+	*		form_fields: A key-value array of the form fields submitted by the end user.
+	*					 The key should match the key for the contact property in HubSpot.
+	*		hs_context: A key-value array of the contextual info for the submission
 	*					This includes: IP address, Page URL, tracking cookie, etc.
 	*
 	*		Note: The fields submitted via the API do not need to match the fields available on the actual form
@@ -87,11 +87,11 @@ class Forms extends Baseclient{
 	}
 
 	/**
-	* Create a Form	
+	* Create a Form
 	*
 	*@param form_data: Data in array format for the form being created.
 	*		fields: Array of arrays for fields to be added to the form.
-	*				These arrays will be added to the form_data array, 
+	*				These arrays will be added to the form_data array,
 	*				no need to include a 'fields' entry in the form_data array passed to function
 	*
 	*@return Response body from HTTP POST request
@@ -109,12 +109,12 @@ class Forms extends Baseclient{
 	}
 
 	/**
-	* Create a Form	
+	* Create a Form
 	*
 	*@param guid: Unique ID for the form
 	*		form_data: Data in array format for the form being created.
 	*		fields: Array of arrays for fields to be added to the form.
-	*				These arrays will be added to the form_data array, 
+	*				These arrays will be added to the form_data array,
 	*				no need to include a 'fields' entry in the form_data array passed to function
 	*
 	*@return Response body from HTTP POST request

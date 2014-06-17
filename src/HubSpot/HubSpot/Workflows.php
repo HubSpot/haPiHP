@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -127,7 +127,7 @@ class Workflows extends BaseClient {
 	*@param wfID: Unique ID for Workflow
 	*		vid: Unique ID for contact
 	*		params: offset: timestamp from which results should start
-	*				limitDate: timstamp for which events should not be past				
+	*				limitDate: timstamp for which events should not be past
 	*
 	* @return Response body from HTTP GET request
 	*
@@ -141,7 +141,7 @@ class Workflows extends BaseClient {
 		catch(HubSpotException $e){
 			throw new HubSpotException('Unable get log events for contact: '.$e);
 		}
-	}	
+	}
 
 	/**
 	* Get upcoming(scheduled) events for Contact in given Workflow
@@ -149,7 +149,7 @@ class Workflows extends BaseClient {
 	*@param wfID: Unique ID for Workflow
 	*		vid: Unique ID for contact
 	*		params: offset: timestamp from which results should start
-	*				limitDate: timstamp for which events should not be past		
+	*				limitDate: timstamp for which events should not be past
 	*
 	* @return Response body from HTTP GET request
 	*

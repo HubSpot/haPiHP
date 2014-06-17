@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2011 HubSpot, Inc.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -33,7 +33,7 @@ class Contacts extends BaseClient {
     *
     *@param params: array of properties and property values for new contact, email is required
     *
-    * @return Response body with JSON object 
+    * @return Response body with JSON object
     * for created Contact from HTTP POST request
     *
     * @throws HubSpotException
@@ -116,7 +116,7 @@ class Contacts extends BaseClient {
     /**
 	* Get recently updated Contacts
 	*
-	*@param params: array of 'count', 'time-offset', or 'vid-offset' for results	
+	*@param params: array of 'count', 'time-offset', or 'vid-offset' for results
 	*
 	* @return JSON objects for recently updated Contacts in portal
 	*
@@ -205,7 +205,7 @@ class Contacts extends BaseClient {
     	}
     	catch(HubSpotException $e){
     		throw new HubSpotException("Unable to search contacts: ".$e);
-    		
+
     	}
     }
 

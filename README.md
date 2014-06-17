@@ -6,7 +6,7 @@
 ```php
 $hapikey = "demo";
 
-$hubspot = new Fungku\HubSpot($hapikey);
+$hubspot = new HubSpot\HubSpot($hapikey);
 
 // get 5 contacts' firstnames, offset by 50
 $contacts = $hubspot->contacts()->get_all_contacts(array(

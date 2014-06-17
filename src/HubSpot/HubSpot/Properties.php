@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -23,7 +23,7 @@ namespace Fungku\HubSpot\API;
 class Properties extends Baseclient{
 
 	protected $API_PATH = 'contacts';
-	protected $API_VERSION = 'v1';	
+	protected $API_VERSION = 'v1';
 
 	/**
 	* Get all Properties
@@ -49,7 +49,7 @@ class Properties extends Baseclient{
 	*
 	*@param name: Name for the new property
 	*		params: Array of info for the new property. Example of fields to include:
-	*		
+	*
     *            "name": "newcustomproperty",
     *            "label": "A New Custom Property",
     *            "description": "A new property for you",
@@ -59,7 +59,7 @@ class Properties extends Baseclient{
     *            "formField": true,
     *            "displayOrder": 6,
     *            "options": []
-    *    					
+    *
 	*
 	* @return Response body from HTTP PUT request
 	*
@@ -81,7 +81,7 @@ class Properties extends Baseclient{
 	*
 	*@param name: Name for the new property
 	*		params: Array of info for the property. Example of fields to include:
-	*		
+	*
     *            "name": "newcustomproperty",
     *            "label": "A New Custom Property",
     *            "description": "A new property for you",
@@ -91,7 +91,7 @@ class Properties extends Baseclient{
     *            "formField": true,
     *            "displayOrder": 6,
     *            "options": []
-    *    					
+    *
 	*
 	* @return Response body of HTTP POST request
 	*
@@ -111,7 +111,7 @@ class Properties extends Baseclient{
 
 	/**
 	* Delete a Property
-	*	
+	*
 	* @param name: Name of property to delete
 	*
 	* @return Response body from HTTP DELETE request

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -106,7 +106,7 @@ class SocialMedia extends Baseclient{
 			print_r('Unable to retrieve broadcast: '.$e);
 		}
 
-	}	
+	}
 
 	/**
 	* Create a Broadcast Message
@@ -151,7 +151,7 @@ class SocialMedia extends Baseclient{
 			print_r('Unable to delete broadcast: '.$e);
 		}
 
-	}	
+	}
 
 
 

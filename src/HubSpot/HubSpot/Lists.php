@@ -1,6 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\API;
+namespace HubSpot\HubSpot;
 
 /**
 * Copyright 2013 HubSpot, Inc.
@@ -71,7 +71,7 @@ class Lists extends Baseclient {
 	* Delete a List
 	*
 	*@param id: Unique ID of the list to delete
-	*		
+	*
 	*
 	* @return Response body from HTTP POST request
 	*
@@ -91,7 +91,7 @@ class Lists extends Baseclient {
 	* Get a contact List by ID
 	*
 	*@param id: Unique ID of the list to retrieve
-	*		
+	*
 	*
 	* @return JSON object for the requested List
 	*
@@ -113,10 +113,10 @@ class Lists extends Baseclient {
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
@@ -138,10 +138,10 @@ class Lists extends Baseclient {
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
@@ -163,10 +163,10 @@ class Lists extends Baseclient {
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
@@ -188,12 +188,12 @@ class Lists extends Baseclient {
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				vidOffset: offset contact vid at which to start the query
-	*				The results will have a 'has-more' field which will indicate 
+	*				The results will have a 'has-more' field which will indicate
 	*				if there are more contacts to be returned, as well as a 'vid-offset' field
 	*				to indicate where to start the next query if there are more results
 	*				property: Use this to return only one contact property in the results
 	*		id: ID of the list to return
-	*		
+	*
 	*
 	* @return JSON objects for the requested Contacts
 	*
@@ -215,12 +215,12 @@ class Lists extends Baseclient {
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				timeOffset: time offset at which to start the query
-	*				The results will have a 'has-more' field which will indicate 
+	*				The results will have a 'has-more' field which will indicate
 	*				if there are more contacts to be returned, as well as a 'time-offset' field
 	*				to indicate where to start the next query if there are more results
 	*				property: Use this to return only one contact property in the results
 	*				id: ID of the list to return
-	*		
+	*
 	*
 	* @return JSON objects for the requested Contacts
 	*
@@ -241,7 +241,7 @@ class Lists extends Baseclient {
 	* Refresh a Contact List
 	*
 	*@param id: Unique ID of the list to refresh
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
@@ -262,7 +262,7 @@ class Lists extends Baseclient {
 	*
 	*@param vids: Unassociated array of vids for contacts to add to list
 	*		id: ID of list to add contacts to
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
@@ -284,7 +284,7 @@ class Lists extends Baseclient {
 	*
 	*@param vids: Unassociated array of vids for contacts to remove from
 	*		id: ID of list to remove contacts from
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
