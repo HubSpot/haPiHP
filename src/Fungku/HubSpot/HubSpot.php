@@ -1,6 +1,4 @@
-<?php
-
-namespace Fungku\HubSpot;
+<?php namespace Fungku\HubSpot;
 
 use Fungku\HubSpot\API\Blog;
 use Fungku\HubSpot\API\Contacts;
@@ -16,28 +14,39 @@ use Fungku\HubSpot\API\SocialMedia;
 use Fungku\HubSpot\API\Workflows;
 
 class HubSpot {
-	
-	public function blog($HAPIKey) { return new Blog($HAPIKey);	}
+    
+    private $hapikey;
+    
+    function __construct($hapikey = null)
+    {
+        if ( ! $hapikey)
+        {
+            $this->hapikey = getenv('HUBSPOT_APIKEY');
+        }
+        $this->hapikey = $hapikey;
+    }
+    
+    public function blog() { return new Blog($this->hapikey); }
 
-	public function contacts($HAPIKey) { return new Contacts($HAPIKey);	}
+    public function contacts() { return new Contacts($this->hapikey); }
 
-	public function forms($HAPIKey) { return new Forms($HAPIKey); }
+    public function forms() { return new Forms($this->hapikey); }
 
-	public function keywords($HAPIKey) { return new Keywords($HAPIKey);	}
+    public function keywords() { return new Keywords($this->hapikey); }
 
-	public function leadNurturing($HAPIKey) { return new LeadNurturing($HAPIKey); }
+    public function leadNurturing() { return new LeadNurturing($this->hapikey); }
 
-	public function leads($HAPIKey) { return new Leads($HAPIKey); }
+    public function leads() { return new Leads($this->hapikey); }
 
-	public function lists($HAPIKey) { return new Lists($HAPIKey); }
+    public function lists() { return new Lists($this->hapikey); }
 
-	public function marketPlace($HAPIKey) { return new MarketPlace($HAPIKey); }
+    public function marketPlace() { return new MarketPlace($this->hapikey); }
 
-	public function properties($HAPIKey) { return new Properties($HAPIKey);	}
+    public function properties() { return new Properties($this->hapikey); }
 
-	public function settings($HAPIKey) { return new Settings($HAPIKey); }
+    public function settings() { return new Settings($this->hapikey); }
 
-	public function socialMedia($HAPIKey) { return new SocialMedia($HAPIKey); }
+    public function socialMedia() { return new SocialMedia($this->hapikey); }
 
-	public function workflows($HAPIKey) { return new WorkFlows($HAPIKey); }
+    public function workflows() { return new WorkFlows($this->hapikey); }
 }
