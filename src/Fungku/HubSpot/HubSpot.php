@@ -23,7 +23,10 @@ class HubSpot {
         {
             $this->hapikey = getenv('HUBSPOT_APIKEY');
         }
-        $this->hapikey = $hapikey;
+        else
+        {
+            $this->hapikey = $hapikey;
+        }
     }
     
     public function blog() { return new Blog($this->hapikey); }
