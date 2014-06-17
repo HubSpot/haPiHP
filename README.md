@@ -18,7 +18,7 @@ $contacts = HubSpot::contacts($hapikey)
 	->get_all_contacts($params);
 ```
 
-If you dont use the ServiceProvider or Facades you will have to use it like this:
+If you dont use the ServiceProvider or Facades you can also use it like this:
 ```php
 $hapikey = "demo";
 
@@ -35,7 +35,6 @@ $contacts = $hubspot->contacts($hapikey)
 	->get_all_contacts($params);
 ```
 
-## Forked from:
 
 ### haPiHP
 
