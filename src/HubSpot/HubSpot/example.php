@@ -339,9 +339,9 @@ $HAPIKey = 'demo';
         print_r($new_list);
 
         //Update a contact List
-        $updated_list_array = array('name'=>'Tweeters and Hubspotters','dynamic'=>false,'portalId'=>'62515','filters'=>
+        $updated_list_array = array('name'=>'Tweeters and HubSpotters','dynamic'=>false,'portalId'=>'62515','filters'=>
             array(array(array('operator'=>'IS_NOT_EMPTY','property'=>'twitterhandle','type'=>'string'),
-                array('operator'=>'EQ','value'=>'Hubspot','property'=>'company','type'=>'string'))));
+                array('operator'=>'EQ','value'=>'HubSpot','property'=>'company','type'=>'string'))));
         $updated_list = $lists->update_list($list_id,$updated_list_array);
         print_r($updated_list);
 

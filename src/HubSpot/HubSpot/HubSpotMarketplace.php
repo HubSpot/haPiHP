@@ -1,5 +1,7 @@
 <?php
 
+namespace HubSpot\HubSpot;
+
 class HubSpotMarketplace{
 
     protected $appSecret;

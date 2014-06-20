@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
  * Copyright 2012 HubSpot, Inc.
  *
@@ -18,9 +21,9 @@
  */
 
 /**
- * An exception for Hubspot errors
+ * An exception for HubSpot errors
  *
  * @author Christopher Hoult <chris.hoult@datasift.com>
  * @see https://github.com/chrishoult
  */
-class HubSpot_Exception extends Exception {}
+class HubSpotException extends Exception {}

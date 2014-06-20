@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Keywords extends HubSpot_BaseClient {
+class Keywords extends BaseClient {
     //Client for HubSpot Keywords API.
 
     //Define required client variables
@@ -30,14 +32,14 @@ class HubSpot_Keywords extends HubSpot_BaseClient {
     *
     * @returns Array of Keywords as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_keywords() {
         $endpoint = 'keywords';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve keywords: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve keywords: ' . $e);
         }
     }
 
@@ -48,14 +50,14 @@ class HubSpot_Keywords extends HubSpot_BaseClient {
     *
     * @returns Keyword as stdObject
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_keyword($keywordGuid) {
         $endpoint = 'keywords/' . $keywordGuid;
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve keyword: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve keyword: ' . $e);
         }
     }
 
@@ -66,7 +68,7 @@ class HubSpot_Keywords extends HubSpot_BaseClient {
     *
     * @returns Body of PUT request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function add_keyword($keyword) {
         $endpoint = 'keywords';
@@ -74,8 +76,8 @@ class HubSpot_Keywords extends HubSpot_BaseClient {
         $body = '{"keyword":"' . $keyword . '"}';
         try {
             return $this->execute_put_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add keyword: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add keyword: ' . $e);
         }
 
     }
@@ -87,14 +89,14 @@ class HubSpot_Keywords extends HubSpot_BaseClient {
     *
     * @returns Body of DELETE request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function delete_keyword($keywordGuid) {
         $endpoint = 'keywords/' . $keywordGuid;
         try {
             return $this->execute_delete_request($this->get_request_url($endpoint,null), null);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to delete keyword: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to delete keyword: ' . $e);
         }
     }
 }

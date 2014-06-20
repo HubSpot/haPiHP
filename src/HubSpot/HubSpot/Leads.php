@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Leads extends HubSpot_BaseClient {
+class Leads extends BaseClient {
     //Client for HubSpot Leads API.
 
     //Define required client variables
@@ -33,14 +35,14 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Array of Leads as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_leads($params) {
         $endpoint = 'list';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve list: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve list: ' . $e);
         }
 
     }
@@ -52,15 +54,15 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns single Lead as stdObject
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_lead($leadGuid) {
         $endpoint = 'lead/' . $leadGuid;
         try {
             $leadArray = json_decode('[' . $this->execute_get_request($this->get_request_url($endpoint,null)) . ']');
             return $leadArray[0];
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve lead: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve lead: ' . $e);
         }
     }
 
@@ -72,7 +74,7 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Response body from HTTP PUT request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function update_lead($leadGuid, $updateData) {
         $endpoint = 'lead/' . $leadGuid;
@@ -80,8 +82,8 @@ class HubSpot_Leads extends HubSpot_BaseClient {
         $body = json_encode($updateData);
         try {
             return $this->execute_put_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to update lead: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to update lead: ' . $e);
         }
     }
 
@@ -93,7 +95,7 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Response body from HTTP PUT request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function close_lead($leadGuid, $closeDate) {
         $endpoint = 'lead/' . $leadGuid;
@@ -104,8 +106,8 @@ class HubSpot_Leads extends HubSpot_BaseClient {
         $body = json_encode($updateData);
         try {
             return $this->execute_put_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to close lead: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to close lead: ' . $e);
         }
     }
 
@@ -117,14 +119,14 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Response body from HTTP PUT request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function add_lead($formURL, $postFields) {
         $body = $this->array_to_params($postFields);
         try {
             return $this->execute_post_request($formURL, $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add lead: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add lead: ' . $e);
         }
     }
 
@@ -133,14 +135,14 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Array of webhooks as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_webhooks() {
         $endpoint = 'callback-url';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve webhooks: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve webhooks: ' . $e);
         }
     }
 
@@ -151,19 +153,19 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function register_webhook($callbackURL) {
         $endpoint = 'callback-url';
         if ($this->isBlank($callbackURL)) {
-            throw new HubSpot_Exception('callbackURL is required');
+            throw new HubSpotException('callbackURL is required');
         }
         $params = array('url'=>$callbackURL);
         $body = $this->array_to_params($params);
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body, true);	// new
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to register webhook: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to register webhook: ' . $e);
         }
     }
 
@@ -174,17 +176,17 @@ class HubSpot_Leads extends HubSpot_BaseClient {
     *
     * @returns Body of DELETE request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function delete_webhook($webhookGuid) {
         if ($this->isBlank($webhookGuid)) {
-            throw new HubSpot_Exception('callbackGuid is required');
+            throw new HubSpotException('callbackGuid is required');
         }
         $endpoint = 'callback-url/' . $webhookGuid;
         try {
             return $this->execute_delete_request($this->get_request_url($endpoint,null), null);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to delete webhook: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to delete webhook: ' . $e);
         }
     }
 

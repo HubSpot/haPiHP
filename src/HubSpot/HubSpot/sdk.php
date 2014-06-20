@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
  * Copyright 2012 HubSpot, Inc.
  *

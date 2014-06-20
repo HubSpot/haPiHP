@@ -1,6 +1,27 @@
-## haPiHP
+# HubSpot PHP API client
 
-### Overview
+## Example
+
+
+```php
+$hapikey = "demo";
+
+$hubspot = new HubSpot\HubSpot($hapikey);
+
+// get 5 contacts' firstnames, offset by 50
+$contacts = $hubspot->contacts()->get_all_contacts(array(
+    'count' => 5, // defaults to 20
+    'property' => 'firstname', // only get the specified properties
+    'vidOffset' => '50' // contact offset used for paging
+));
+```
+
+*Note:* The Hubspot class checks for a `HUBSPOT_APIKEY` environment variable if you don't include one during instantiation.
+
+
+### haPiHP
+
+#### Overview
 
 A PHP client for HubSpot's APIs.  Docs for this client: [https://github.com/HubSpot/haPiHP/wiki/haPiHP](https://github.com/HubSpot/haPiHP/wiki/haPiHP).
 
@@ -14,3 +35,4 @@ General API reference documentation: [http://developers.hubspot.com/docs](http:/
 * [ajorgensen](https://github.com/ajorgensen) (Andrew Jorgensen)
 * [jprado](https://github.com/jprado)
 * [thinkclay](https://github.com/thinkclay) (Clayton McIlrath)
+*

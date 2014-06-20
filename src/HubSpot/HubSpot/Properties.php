@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2013 HubSpot, Inc.
 *
@@ -16,12 +19,11 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Properties extends HubSpot_Baseclient{
+class Properties extends Baseclient{
 
 	protected $API_PATH = 'contacts';
-	protected $API_VERSION = 'v1';	
+	protected $API_VERSION = 'v1';
 
 	/**
 	* Get all Properties
@@ -29,7 +31,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array of all properties in portal
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_all_properties(){
 		$endpoint = 'properties';
@@ -37,7 +39,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve properties: '.$e);
 		}
 	}
@@ -47,7 +49,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	*@param name: Name for the new property
 	*		params: Array of info for the new property. Example of fields to include:
-	*		
+	*
     *            "name": "newcustomproperty",
     *            "label": "A New Custom Property",
     *            "description": "A new property for you",
@@ -57,11 +59,11 @@ class HubSpot_Properties extends HubSpot_Baseclient{
     *            "formField": true,
     *            "displayOrder": 6,
     *            "options": []
-    *    					
+    *
 	*
 	* @return Response body from HTTP PUT request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function create_property($name,$params){
 		$endpoint = 'properties/'.$name;
@@ -69,7 +71,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_put_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to create property: '.$e);
 		}
 	}
@@ -79,7 +81,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	*@param name: Name for the new property
 	*		params: Array of info for the property. Example of fields to include:
-	*		
+	*
     *            "name": "newcustomproperty",
     *            "label": "A New Custom Property",
     *            "description": "A new property for you",
@@ -89,11 +91,11 @@ class HubSpot_Properties extends HubSpot_Baseclient{
     *            "formField": true,
     *            "displayOrder": 6,
     *            "options": []
-    *    					
+    *
 	*
 	* @return Response body of HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function update_property($name,$params){
 		$endpoint = 'properties/'.$name;
@@ -101,7 +103,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to update property: '.$e);
 		}
 	}
@@ -109,12 +111,12 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 
 	/**
 	* Delete a Property
-	*	
+	*
 	* @param name: Name of property to delete
 	*
 	* @return Response body from HTTP DELETE request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function delete_property($name){
 		$endpoint = 'properties/'.$name;
@@ -122,7 +124,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return $this->new_execute_delete_request($this->get_request_url($endpoint,null));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to delete property: '.$e);
 		}
 	}
@@ -133,14 +135,14 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array of all property groups in portal
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_property_groups(){
 		$endpoint = 'groups';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve property groups: '.$e);
 		}
 
@@ -153,14 +155,14 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array containing requested property group
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_property_group($name){
 		$endpoint = 'groups/'.$name;
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve property group: '.$e);
 		}
 
@@ -179,7 +181,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array containing requested property group
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function create_property_group($name,$params){
 		$endpoint = 'groups/'.$name;
@@ -187,7 +189,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_put_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to create property group: '.$e);
 		}
 	}
@@ -205,7 +207,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array containing requested property group
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function update_property_group($name,$params){
 		$endpoint = 'groups/'.$name;
@@ -213,7 +215,7 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to update property group: '.$e);
 		}
 	}
@@ -225,14 +227,14 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	*
 	* @return Array containing requested property group
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function delete_property_group($name){
 		$endpoint = 'groups/'.$name;
 		try{
 			return json_decode($this->execute_delete_request($this->get_request_url($endpoint,null),null));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to delete property group: '.$e);
 		}
 

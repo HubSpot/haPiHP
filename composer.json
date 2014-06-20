@@ -1,0 +1,14 @@
+{
+    "name": "hubspot/hubspot",
+    "description": "haPiHP - HubSpot PHP API client",
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "HubSpot\\HubSpot": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

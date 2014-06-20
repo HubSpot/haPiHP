@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2013 HubSpot, Inc.
 *
@@ -16,13 +19,11 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Lists extends HubSpot_Baseclient{
+class Lists extends Baseclient {
+
 	protected $API_PATH = 'contacts';
 	protected $API_VERSION = 'v1';
-
-
 
 	/**
 	* Create a new List
@@ -32,7 +33,7 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function create_list($params){
 		$endpoint = 'lists';
@@ -40,7 +41,7 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to create list: ".$e);
 		}
 	}
@@ -54,14 +55,14 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function update_list($id, $params){
 		$endpoint = 'lists/'.$id;
 		try{
 			return json_decode($this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to update list: ".$e);
 		}
 	}
@@ -70,18 +71,18 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	* Delete a List
 	*
 	*@param id: Unique ID of the list to delete
-	*		
+	*
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function delete_list($id){
 		$endpoint = 'lists/'.$id;
 		try{
 			return json_decode($this->execute_delete_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to delete list: ".$e);
 		}
 	}
@@ -90,18 +91,18 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	* Get a contact List by ID
 	*
 	*@param id: Unique ID of the list to retrieve
-	*		
+	*
 	*
 	* @return JSON object for the requested List
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_list($id){
 		$endpoint = 'lists/'.$id;
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to retrieve list: '.$e);
 		}
 	}
@@ -112,21 +113,21 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_lists($params){
 		$endpoint = 'lists';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to get lists: '.$e);
 		}
 	}
@@ -137,21 +138,21 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_static_lists($params){
 		$endpoint = 'lists/static';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to get lists: '.$e);
 		}
 	}
@@ -162,21 +163,21 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				offset: offset number at which to start the list query
-	*				The list results will have a 'has-more' field which will indicate 
+	*				The list results will have a 'has-more' field which will indicate
 	*				if there are more lists to be returned, as well as an 'offset' field
 	*				to indicate where to start the next query if there are more results
-	*		
+	*
 	*
 	* @return JSON objects for the requested Lists
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_dynamic_lists($params){
 		$endpoint = 'lists/dynamic';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to get lists: '.$e);
 		}
 	}
@@ -187,23 +188,23 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				vidOffset: offset contact vid at which to start the query
-	*				The results will have a 'has-more' field which will indicate 
+	*				The results will have a 'has-more' field which will indicate
 	*				if there are more contacts to be returned, as well as a 'vid-offset' field
 	*				to indicate where to start the next query if there are more results
 	*				property: Use this to return only one contact property in the results
 	*		id: ID of the list to return
-	*		
+	*
 	*
 	* @return JSON objects for the requested Contacts
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_contacts_in_list($params, $id){
 		$endpoint = 'lists/'.$id.'/contacts/all';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to get contacts: '.$e);
 		}
 	}
@@ -214,23 +215,23 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*@param params: Array of parameters for request URL
 	*				count: number of lists to return
 	*				timeOffset: time offset at which to start the query
-	*				The results will have a 'has-more' field which will indicate 
+	*				The results will have a 'has-more' field which will indicate
 	*				if there are more contacts to be returned, as well as a 'time-offset' field
 	*				to indicate where to start the next query if there are more results
 	*				property: Use this to return only one contact property in the results
 	*				id: ID of the list to return
-	*		
+	*
 	*
 	* @return JSON objects for the requested Contacts
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_recent_contacts_in_list($params, $id){
 		$endpoint = 'lists/'.$id.'/contacts/recent';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to get contacts: '.$e);
 		}
 	}
@@ -240,18 +241,18 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	* Refresh a Contact List
 	*
 	*@param id: Unique ID of the list to refresh
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function refresh_list($id){
 		$endpoint = 'lists/'.$id.'/refresh';
 		try{
 			return $this->execute_post_request($this->get_request_url($endpoint,null),null);
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to refresh list: ".$e);
 		}
 	}
@@ -261,11 +262,11 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*
 	*@param vids: Unassociated array of vids for contacts to add to list
 	*		id: ID of list to add contacts to
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function add_contacts_to_list($vids,$id){
 		$endpoint = 'lists/'.$id.'/add';
@@ -273,7 +274,7 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 		try{
 			return $this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($request_body));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to add contacts: ".$e);
 		}
 	}
@@ -283,11 +284,11 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 	*
 	*@param vids: Unassociated array of vids for contacts to remove from
 	*		id: ID of list to remove contacts from
-	*		
+	*
 	*
 	* @return Resonse body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function remove_contacts_from_list($vids,$id){
 		$endpoint = 'lists/'.$id.'/remove';
@@ -295,7 +296,7 @@ class HubSpot_Lists extends HubSpot_Baseclient{
 		try{
 			return $this->execute_JSON_post_request($this->get_request_url($endpoint,null),json_encode($request_body));
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r("Unable to add contacts: ".$e);
 		}
 	}

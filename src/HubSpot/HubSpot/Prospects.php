@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2011 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Prospects extends HubSpot_BaseClient {
+class Prospects extends BaseClient {
     //Client for HubSpot Prospects API.
 
     //Define required client variables
@@ -31,14 +33,14 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     * @param params: Array of query parameters
     * @returns Array of Prospects as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_timeline($params) {
         $endpoint = 'timeline';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve timeline: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve timeline: ' . $e);
         }
     }
 
@@ -48,14 +50,14 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     * @param organization: Organization to retrieve
     * @returns Array of Organization details as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_organization_details($organization) {
         $endpoint = 'timeline/' . $organization;
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve organization details: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve organization details: ' . $e);
         }
     }
 
@@ -65,15 +67,15 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     * @param query: Query string
     * @returns Array of typeahead results
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_typeahead($query) {
         $endpoint = 'typeahead';
         $params = array('q'=>$query);
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve typeahead information: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve typeahead information: ' . $e);
         }
     }
 
@@ -84,18 +86,18 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     * @param query: Query string
     * @returns Array of search results
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_search_results($type, $query) {
         if (($type != 'city')&&($type!='region')&&($type!='country')) {
-            throw new HubSpot_Exception('Invalid type: ' . $type . ' Type must be equal to city, region, or country');
+            throw new HubSpotException('Invalid type: ' . $type . ' Type must be equal to city, region, or country');
         }
         $endpoint = 'search/' . $type;
         $params = array('q'=>$query);
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve search results: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve search results: ' . $e);
         }
     }
 
@@ -104,14 +106,14 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     *
     * @returns Array of filters as stdObjects
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function get_filters() {
         $endpoint = 'filters';
         try {
             return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to retrieve filters: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to retrieve filters: ' . $e);
         }
     }
 
@@ -122,13 +124,13 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function add_filter($organization) {
         $endpoint = 'filters';
 
         if ($this->isBlank($organization)) {
-            throw new HubSpot_Exception('Organization is required');
+            throw new HubSpotException('Organization is required');
         }
 
         $params = array('organization'=>$organization);
@@ -136,8 +138,8 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_post_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to add filter: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to add filter: ' . $e);
         }
     }
 
@@ -148,13 +150,13 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
     *
     * @returns Body of POST request
     *
-    * @throws HubSpot_Exception
+    * @throws HubSpotException
     **/
     public function delete_filter($organization) {
         $endpoint = 'filters';
 
         if ($this->isBlank($organization)) {
-            throw new HubSpot_Exception('Organization is required');
+            throw new HubSpotException('Organization is required');
         }
 
         $params = array('organization'=>$organization);
@@ -162,8 +164,8 @@ class HubSpot_Prospects extends HubSpot_BaseClient {
         $body = $this->array_to_params($params);
         try {
             return $this->execute_delete_request($this->get_request_url($endpoint,null), $body);
-        } catch (HubSpot_Exception $e) {
-            throw new HubSpot_Exception('Unable to delete filter: ' . $e);
+        } catch (HubSpotException $e) {
+            throw new HubSpotException('Unable to delete filter: ' . $e);
         }
     }
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace HubSpot\HubSpot;
+
 /**
 * Copyright 2013 HubSpot, Inc.
 *
@@ -16,9 +19,8 @@
 * language governing permissions and limitations under the
 * License.
 */
-require_once('class.baseclient.php');
 
-class HubSpot_Workflows extends HubSpot_BaseClient{
+class Workflows extends BaseClient {
 	protected $API_PATH = 'automation';
 	protected $API_VERSION = 'v2';
 
@@ -30,15 +32,15 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*
 	* @return JSON objects for all workflows
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_all_workflows(){
 		$endpoint = 'workflows';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
-			throw new HubSpot_Exception('Unable to get workflows: '.$e);
+		catch(HubSpotException $e){
+			throw new HubSpotException('Unable to get workflows: '.$e);
 		}
 	}
 
@@ -49,15 +51,15 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*
 	* @return JSON object for requested Workflow
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_workflow_by_ID($id){
 		$endpoint = 'workflows/'.$id;
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
-			throw new HubSpot_Exception('Unable to get workflow: '.$e);
+		catch(HubSpotException $e){
+			throw new HubSpotException('Unable to get workflow: '.$e);
 		}
 	}
 
@@ -69,14 +71,14 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function enroll_contact_in_workflow($wfID, $email){
 		$endpoint = 'workflows/'.$wfID.'/enrollments/contacts/'.$email;
 		try{
 			return $this->execute_post_request($this->get_request_url($endpoint,null),null);
 		}
-		catch(HubSpot_Exception $e){
+		catch(HubSpotException $e){
 			print_r('Unable to enroll contact: '.$e);
 		}
 	}
@@ -89,13 +91,13 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*
 	* @return Response body from HTTP POST request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function unenroll_contact_from_workflow($wfID, $email){
 		$endpoint = 'workflows/'.$wfID.'/enrollments/contacts/'.$email;
 		try {
 			return $this->execute_delete_request($this->get_request_url($endpoint,null),null);
-		} catch (HubSpot_Exception $e) {
+		} catch (HubSpotException $e) {
 			print_r('Unable to unenroll contact: '.$e);
 		}
 	}
@@ -107,15 +109,15 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*
 	* @return Response body from HTTP GET request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_current_enrollments($vid){
 		$endpoint = 'workflows/enrollments/contacts/'.$vid;
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,null)));
 		}
-		catch(HubSpot_Exception $e){
-			throw new HubSpot_Exception('Unable get enrollments for contact: '.$e);
+		catch(HubSpotException $e){
+			throw new HubSpotException('Unable get enrollments for contact: '.$e);
 		}
 	}
 
@@ -125,21 +127,21 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*@param wfID: Unique ID for Workflow
 	*		vid: Unique ID for contact
 	*		params: offset: timestamp from which results should start
-	*				limitDate: timstamp for which events should not be past				
+	*				limitDate: timstamp for which events should not be past
 	*
 	* @return Response body from HTTP GET request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_log_events($wfID, $vid, $params){
 		$endpoint = 'workflows/'.$wfID.'/logevents/contacts/'.$vid.'/past';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
-			throw new HubSpot_Exception('Unable get log events for contact: '.$e);
+		catch(HubSpotException $e){
+			throw new HubSpotException('Unable get log events for contact: '.$e);
 		}
-	}	
+	}
 
 	/**
 	* Get upcoming(scheduled) events for Contact in given Workflow
@@ -147,19 +149,19 @@ class HubSpot_Workflows extends HubSpot_BaseClient{
 	*@param wfID: Unique ID for Workflow
 	*		vid: Unique ID for contact
 	*		params: offset: timestamp from which results should start
-	*				limitDate: timstamp for which events should not be past		
+	*				limitDate: timstamp for which events should not be past
 	*
 	* @return Response body from HTTP GET request
 	*
-	* @throws HubSpot_Exception
+	* @throws HubSpotException
 	**/
 	public function get_upcoming_events($wfID, $vid, $params){
 		$endpoint = 'workflows/'.$wfID.'/logevents/contacts/'.$vid.'/upcoming';
 		try{
 			return json_decode($this->execute_get_request($this->get_request_url($endpoint,$params)));
 		}
-		catch(HubSpot_Exception $e){
-			throw new HubSpot_Exception('Unable get upcoming events for contact: '.$e);
+		catch(HubSpotException $e){
+			throw new HubSpotException('Unable get upcoming events for contact: '.$e);
 		}
 	}
 
