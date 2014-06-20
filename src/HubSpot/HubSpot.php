@@ -19,14 +19,10 @@ class HubSpot {
 
     function __construct($hapikey = null)
     {
+        $this->hapikey = $hapikey;
+        
         if (is_null($hapikey))
-        {
             $this->hapikey = getenv('HUBSPOT_APIKEY');
-        }
-        else
-        {
-            $this->hapikey = $hapikey;
-        }
     }
 
     public function blog() { return new Blog($this->hapikey); }
