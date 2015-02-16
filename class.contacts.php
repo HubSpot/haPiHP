@@ -76,14 +76,14 @@ class HubSpot_Contacts extends HubSpot_BaseClient{
     /**
     * Create or Update a Contact
     *
-    *@param params: array of properties and property values for contact
+    * @param params: array of properties and property values for contact
     *
     * @return Response body from HTTP POST request
     *
     * @throws HubSpot_Exception
     **/
     public function create_or_update_contact($email, $params){
-        $endpoint = 'contact/createOrUpdate/email/'.$email.'/';
+        $endpoint = 'contact/createOrUpdate/email/'.urlencode($email).'/';
         $properties = array();
         foreach ($params as $key => $value) {
             array_push($properties, array("property"=>$key,"value"=>$value));
