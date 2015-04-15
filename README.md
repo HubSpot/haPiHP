@@ -6,6 +6,24 @@ A PHP client for HubSpot's APIs.  Docs for this client: [https://github.com/HubS
 
 General API reference documentation: [http://developers.hubspot.com/docs](http://developers.hubspot.com/docs).
 
+### Composer Installation
+
+Add haPiPH to composer.json:
+```
+  "require": {
+    "hubspot/haPiHP": "1.0"
+  }
+```
+
+Run composer install or update:
+```
+composer install
+```
+or
+```
+composer update
+```
+
 ### Contributors
 
 * [adrianmott](https://github.com/adrianmott) (Adrian Mott)
@@ -14,3 +32,4 @@ General API reference documentation: [http://developers.hubspot.com/docs](http:/
 * [ajorgensen](https://github.com/ajorgensen) (Andrew Jorgensen)
 * [jprado](https://github.com/jprado)
 * [thinkclay](https://github.com/thinkclay) (Clayton McIlrath)
+* [parrisvarney](https://github.com/parrisvarney) (Parris Varney)
