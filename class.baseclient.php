@@ -184,6 +184,7 @@ class HubSpot_BaseClient
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);    // new
+        curl_setopt($ch, CURLOPT_ENCODING , "gzip");
         $output = curl_exec($ch);
         $errno = curl_errno($ch);
         $error = curl_error($ch);
