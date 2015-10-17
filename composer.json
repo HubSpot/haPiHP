@@ -1,0 +1,18 @@
+{
+  "name": "hubspot/haPiHP",
+  "description": "A PHP client for HubSpot's APIs",
+  "homepage": "https://github.com/HubSpot/haPiHP",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "hubspot",
+      "email": "support@hubspot.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "classmap": ["/"]
+  }
+}
