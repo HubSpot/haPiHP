@@ -1,0 +1,57 @@
+{
+    "name": "hubspot/ha-pi-hp",
+    "description": "An updated PHP client for the HubSpot API.",
+    "type": "library",
+    "keywords": ["hubspot"],
+    "homepage": "http://developers.hubspot.com",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Adrian Mott",
+            "homepage": "https://github.com/adrianmott"
+        },
+        {
+            "name": "Christopher Hoult",
+            "homepage": "https://github.com/chrishoult"
+        },
+        {
+            "name": "Ben Smith",
+            "homepage": "https://github.com/TheRealBenSmith"
+        },
+        {
+            "name": "Andrew Jorgensen",
+            "homepage": "https://github.com/ajorgensen"
+        },
+        {
+            "name": "Clayton McIlrath",
+            "homepage": "https://github.com/thinkclay"
+        },
+        {
+            "name": "Chris Jones",
+            "homepage": "https://github.com/leek",
+            "email": "leeked@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "classmap": [
+            "class.baseclient.php",
+            "class.blog.php",
+            "class.contacts.php",
+            "class.exception.php",
+            "class.forms.php",
+            "class.hubspotmarketplace.php",
+            "class.keywords.php",
+            "class.leadnurturing.php",
+            "class.leads.php",
+            "class.lists.php",
+            "class.properties.php",
+            "class.prospects.php",
+            "class.settings.php",
+            "class.socialmedia.php",
+            "class.workflows.php"
+        ]
+    }
+}
