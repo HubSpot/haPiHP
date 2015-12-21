@@ -41,7 +41,7 @@ class HubSpot_Companies extends HubSpot_BaseClient{
     	$endpoint = 'companies';
     	$properties = array();
     	foreach ($params as $key => $value) {
-    		array_push($properties, array("property"=>$key,"value"=>$value));
+    		array_push($properties, array("name"=>$key,"value"=>$value));
     	}
     	$properties = json_encode(array("properties"=>$properties));
     	try{
@@ -67,7 +67,7 @@ class HubSpot_Companies extends HubSpot_BaseClient{
     	$endpoint = 'companies/'.$cid;
     	$properties = array();
     	foreach ($params as $key => $value) {
-    		array_push($properties, array("property"=>$key,"value"=>$value));
+    		array_push($properties, array("name"=>$key,"value"=>$value));
     	}
     	$properties = json_encode(array("properties"=>$properties));
     	try{
@@ -240,7 +240,7 @@ class HubSpot_Companies extends HubSpot_BaseClient{
     public function add_contact_to_company($vid, $cid){
         $endpoint = 'companies/'.$cid.'/contacts/'.$vid;
         try{
-            return json_decode($this->execute_put_request($this->get_request_url($endpoint,null)));
+            return json_decode($this->execute_put_request($this->get_request_url($endpoint,null), null));
         }
         catch(HubSpot_Exception $e){
             throw new HubSpot_Exception('Unable to associate contact with company: '.$e);

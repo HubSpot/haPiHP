@@ -41,7 +41,7 @@ class HubSpot_Deals extends HubSpot_BaseClient{
     	$endpoint = 'deal';
     	$properties = array();
     	foreach ($params as $key => $value) {
-    		array_push($properties, array("property"=>$key,"value"=>$value));
+    		array_push($properties, array("name"=>$key,"value"=>$value));
     	}
     	$properties = json_encode(array("properties"=>$properties));
     	try{
@@ -66,7 +66,7 @@ class HubSpot_Deals extends HubSpot_BaseClient{
     	$endpoint = 'deal/'.$vid;
     	$properties = array();
     	foreach ($params as $key => $value) {
-    		array_push($properties, array("property"=>$key,"value"=>$value));
+    		array_push($properties, array("name"=>$key,"value"=>$value));
     	}
     	$properties = json_encode(array("properties"=>$properties));
     	try{
@@ -165,18 +165,19 @@ class HubSpot_Deals extends HubSpot_BaseClient{
 	* Associate a Deal with a contact or company
     * http://developers.hubspot.com/docs/methods/deals/associate_deal
 	*
-	* @param object_type : 'CONTACT' or 'COMPANY' - which type of association to create
+	* @param did         : Unique ID for the deal being associated
+    * @param object_type : 'CONTACT' or 'COMPANY' - which type of association to create
     * @param object_id   : Unique ID of the contact or company to associate
 	*
 	* @return Response body from HTTP request
 	*
 	* @throws HubSpot_Exception
     **/
-    public function add_deal_association($vid, $object_type, $object_id ){
-    	$endpoint = 'deal/'.$vid.'/associations/'.strtoupper($object_type);
+    public function add_deal_association($did, $object_type, $object_id ){
+    	$endpoint = 'deal/'.$did.'/associations/'.strtoupper($object_type);
         $params = array( 'id' => $object_id );
     	try{
-    		return json_decode($this->execute_put_request($this->get_request_url($endpoint,$params)));
+    		return json_decode( $this->execute_put_request( $this->get_request_url($endpoint, $params), null ) );
     	}
     	catch(HubSpot_Exception $e){
     		throw new HubSpot_Exception('Unable to associate ' . $object_type . ' with deal: '.$e);
@@ -188,6 +189,7 @@ class HubSpot_Deals extends HubSpot_BaseClient{
     * Remove association of a Deal with a contact or company
     * http://developers.hubspot.com/docs/methods/deals/delete_association
     *
+    * @param did         : Unique ID for the deal being associated
     * @param object_type : 'CONTACT' or 'COMPANY' - which type of association to create
     * @param object_id   : Unique ID of the contact or company to associate
     *
@@ -195,11 +197,11 @@ class HubSpot_Deals extends HubSpot_BaseClient{
     *
     * @throws HubSpot_Exception
     **/
-    public function remove_deal_association($vid, $object_type, $object_id ){
-        $endpoint = 'deal/'.$vid.'/associations/'.strtoupper($object_type);
+    public function remove_deal_association($did, $object_type, $object_id ){
+        $endpoint = 'deal/'.$did.'/associations/'.strtoupper($object_type);
         $params = array( 'id' => $object_id );
         try{
-            return json_decode($this->execute_delete_request($this->get_request_url($endpoint,$params)));
+            return json_decode( $this->execute_delete_request( $this->get_request_url( $endpoint, $params ), null ) );
         }
         catch(HubSpot_Exception $e){
             throw new HubSpot_Exception('Unable to associate ' . $object_type . ' with deal: '.$e);
