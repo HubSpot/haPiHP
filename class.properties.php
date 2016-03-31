@@ -21,7 +21,7 @@ require_once('class.baseclient.php');
 class HubSpot_Properties extends HubSpot_Baseclient{
 
 	protected $API_PATH = 'contacts';
-	protected $API_VERSION = 'v1';	
+	protected $API_VERSION = 'v2';	
 
 	/**
 	* Get all Properties
@@ -117,10 +117,10 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 	* @throws HubSpot_Exception
 	**/
 	public function delete_property($name){
-		$endpoint = 'properties/'.$name;
+		$endpoint = 'properties/named/'.$name;
 
 		try{
-			return $this->new_execute_delete_request($this->get_request_url($endpoint,null));
+			return $this->execute_delete_request($this->get_request_url($endpoint,null));
 		}
 		catch(HubSpot_Exception $e){
 			print_r('Unable to delete property: '.$e);
@@ -242,3 +242,4 @@ class HubSpot_Properties extends HubSpot_Baseclient{
 }
 
 ?>
+
